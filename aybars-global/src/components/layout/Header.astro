@@ -53,9 +53,14 @@ const navLinks = [
 ]
 
 // Desktop nav links - hide events and press for Russian to prevent menu overflow
-const desktopNavLinks = currentLang === 'ru' 
-  ? navLinks.filter(link => link.href !== localizedHref('/events') && link.href !== localizedHref('/press'))
-  : navLinks
+const desktopNavLinks =
+  currentLang === 'ru'
+    ? navLinks.filter(
+        (link) =>
+          link.href !== localizedHref('/events') &&
+          link.href !== localizedHref('/press')
+      )
+    : navLinks
 
 const currentPath = Astro.url.pathname
 ---
