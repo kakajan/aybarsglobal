@@ -1,0 +1,238 @@
+---
+import '@/styles/global.css'
+import Header from '@/components/layout/Header.astro'
+import Footer from '@/components/layout/Footer.astro'
+import JsonLd from '@/components/seo/JsonLd.astro'
+import HreflangTags from '@/components/seo/HreflangTags.astro'
+import { companyInfo } from '@/data/company'
+import {
+  type Language,
+  defaultLang,
+  isRTL,
+  getLangFromUrl,
+  getCanonicalUrl,
+  getTranslations,
+  languages,
+  supportedLanguages,
+} from '@/i18n'
+
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  canonical?: string
+  type?: 'website' | 'article'
+  noindex?: boolean
+  jsonLdType?:
+    | 'Organization'
+    | 'WebSite'
+    | 'LocalBusiness'
+    | 'Article'
+    | 'Event'
+    | 'BreadcrumbList'
+  jsonLdData?: Record<string, any>
+  lang?: Language
+}
+
+// Detect language from URL
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url)
+const t = getTranslations(currentLang)
+const dir = isRTL(currentLang) ? 'rtl' : 'ltr'
+
+// Get current path for generating alternate links
+const currentPath = Astro.url.pathname
+
+const {
+  title = t.meta.siteName,
+  description = t.meta.siteDescription,
+  image = '/images/og-image.webp',
+  canonical = getCanonicalUrl(currentPath, currentLang),
+  type = 'website',
+  noindex = false,
+  jsonLdType = 'Organization',
+  jsonLdData = {},
+} = Astro.props
+
+const fullTitle =
+  title === t.meta.siteName ? title : `${title} | ${t.meta.siteName}`
+const siteUrl = 'https://aybarsglobal.com'
+const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`
+
+// Get locale for og:locale
+const localeMap: Record<Language, string> = {
+  en: 'en_US',
+  tr: 'tr_TR',
+  ar: 'ar_SA',
+  fa: 'fa_IR',
+  ru: 'ru_RU',
+}
+const currentLocale = localeMap[currentLang]
+---
+
+<!doctype html>
+<html lang={currentLang} dir={dir} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Dark Mode Script (runs before render to prevent flash) -->
+    <script is:inline>
+      ;(function () {
+        const theme = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches
+        if (theme === 'dark' || (!theme && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={t.meta.keywords} />
+    <meta name="author" content={t.meta.siteName} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, nofollow' : 'index, follow'}
+    />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Hreflang Tags for Multi-Language SEO -->
+    <HreflangTags currentLang={currentLang} currentPath={currentPath} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0A1628" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={t.meta.siteName} />
+    <meta property="og:locale" content={currentLocale} />
+    {/* Add alternate locales for Open Graph */}
+    {
+      supportedLanguages
+        .filter((l) => l !== currentLang)
+        .map((l) => (
+          <meta property="og:locale:alternate" content={localeMap[l]} />
+        ))
+    }
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImage} />
+
+    <!-- Geo Tags for International SEO -->
+    <meta name="geo.region" content="TR-34" />
+    <meta name="geo.placename" content="Istanbul" />
+    <meta name="geo.position" content="41.1171;29.0168" />
+    <meta name="ICBM" content="41.1171, 29.0168" />
+
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Arabic/Persian Font for RTL Languages -->
+    {
+      isRTL(currentLang) && (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      )
+    }
+
+    <!-- JSON-LD Structured Data -->
+    <JsonLd type={jsonLdType} data={jsonLdData} />
+    <JsonLd type="WebSite" />
+  </head>
+  <body
+    class="min-h-screen flex flex-col bg-white dark:bg-primary-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-300"
+  >
+    <!-- Skip to Content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary-900 text-white px-4 py-2 rounded-lg z-[100]"
+    >
+      Skip to content
+    </a>
+
+    <!-- Header -->
+    <Header />
+
+    <!-- Main Content -->
+    <main id="main-content" class="flex-grow pt-20">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-8 right-8 w-12 h-12 bg-primary-900 dark:bg-accent-500 text-white rounded-full shadow-lg
+             flex items-center justify-center opacity-0 invisible transition-all duration-300
+             hover:bg-accent-500 dark:hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-400 z-40"
+      aria-label="Back to top"
+    >
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+      </svg>
+    </button>
+
+    <script>
+      // Back to top functionality
+      const backToTop = document.getElementById('back-to-top')
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          backToTop?.classList.remove('opacity-0', 'invisible')
+          backToTop?.classList.add('opacity-100', 'visible')
+        } else {
+          backToTop?.classList.add('opacity-0', 'invisible')
+          backToTop?.classList.remove('opacity-100', 'visible')
+        }
+      })
+
+      backToTop?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      })
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault()
+          const target = document.querySelector(
+            this.getAttribute('href') as string
+          )
+          target?.scrollIntoView({ behavior: 'smooth' })
+        })
+      })
+    </script>
+  </body>
+</html>

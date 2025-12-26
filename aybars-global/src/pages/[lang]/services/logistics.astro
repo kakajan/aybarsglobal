@@ -1,0 +1,309 @@
+---
+/**
+ * Dynamic language route for Logistics page
+ * Handles: /tr/services/logistics, /ar/services/logistics, /fa/services/logistics, /ru/services/logistics
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import CTASection from '@/components/home/CTASection.astro'
+import {
+  type Language,
+  supportedLanguages,
+  defaultLang,
+  getTranslations,
+  getLocalizedPath,
+} from '@/i18n'
+
+export function getStaticPaths() {
+  return supportedLanguages
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({
+      params: { lang },
+      props: { lang: lang as Language },
+    }))
+}
+
+const { lang } = Astro.props
+const t = getTranslations(lang)
+const localizedHref = (path: string) => getLocalizedPath(path, lang)
+
+const service = t.services.mainServicesData.find((s) => s.slug === 'logistics')!
+---
+
+<BaseLayout
+  title={t.services.logistics.title}
+  description={t.services.logistics.fullDescription}
+  lang={lang}
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <nav
+          class="flex items-center space-x-2 rtl:space-x-reverse text-sm text-gray-300 mb-6"
+        >
+          <a href={localizedHref('/')} class="hover:text-white">{t.nav.home}</a>
+          <span>/</span>
+          <a href={localizedHref('/services')} class="hover:text-white"
+            >{t.nav.services}</a
+          >
+          <span>/</span>
+          <span class="text-accent-400">{t.nav.logistics}</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          {t.services.logistics.title}
+        </h1>
+        <p class="text-xl text-gray-300">
+          {t.sections.services.title}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-subtitle">{t.services.logistics.title}</span>
+          <h2
+            class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-6"
+          >
+            {t.sections.services.title}
+          </h2>
+          <div
+            class="prose prose-lg text-gray-600 dark:text-gray-400 space-y-4"
+          >
+            <p>
+              {t.services.logistics.fullDescription}
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {
+              service.features.map((feature) => (
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                  <svg
+                    class="w-5 h-5 text-accent-500 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">
+                    {feature}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="relative">
+          <div
+            class="bg-gradient-to-br from-primary-100 to-accent-50 dark:from-primary-800 dark:to-primary-900 rounded-3xl p-8 md:p-10"
+          >
+            <div
+              class="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-2xl font-bold text-primary-900 dark:text-white text-center mb-4"
+            >
+              {t.services.features.globalNetwork}
+            </h3>
+            <p class="text-center text-gray-600 dark:text-gray-400">
+              {t.services.whyChoose.globalNetworkDesc}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transportation Options -->
+  <section
+    id="transport-options"
+    class="section-padding bg-gray-50 dark:bg-primary-900"
+  >
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.services.transport.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.services.transport.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <!-- Road Transport -->
+        <div class="card p-8 text-center group hover:shadow-xl">
+          <div
+            class="w-16 h-16 mx-auto mb-6 bg-primary-100 rounded-2xl flex items-center justify-center
+                    group-hover:bg-primary-900 transition-colors"
+          >
+            <svg
+              class="w-8 h-8 text-primary-600 group-hover:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 dark:text-white mb-2">
+            {t.transport.road.title}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
+            {t.transport.road.description}
+          </p>
+          <ul class="text-start space-y-2">
+            {
+              t.transport.road.features.map((feature) => (
+                <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg
+                    class="w-4 h-4 text-success-500 me-2 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Air Transport -->
+        <div class="card p-8 text-center group hover:shadow-xl">
+          <div
+            class="w-16 h-16 mx-auto mb-6 bg-primary-100 rounded-2xl flex items-center justify-center
+                    group-hover:bg-primary-900 transition-colors"
+          >
+            <svg
+              class="w-8 h-8 text-primary-600 group-hover:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 dark:text-white mb-2">
+            {t.transport.air.title}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
+            {t.transport.air.description}
+          </p>
+          <ul class="text-start space-y-2">
+            {
+              t.transport.air.features.map((feature) => (
+                <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg
+                    class="w-4 h-4 text-success-500 me-2 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Sea Transport -->
+        <div class="card p-8 text-center group hover:shadow-xl">
+          <div
+            class="w-16 h-16 mx-auto mb-6 bg-primary-100 rounded-2xl flex items-center justify-center
+                    group-hover:bg-primary-900 transition-colors"
+          >
+            <svg
+              class="w-8 h-8 text-primary-600 group-hover:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M3 17h18M5 17l-2 4M19 17l2 4M12 3v10M7 8h10l-2 9H9L7 8z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-primary-900 dark:text-white mb-2">
+            {t.transport.sea.title}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
+            {t.transport.sea.description}
+          </p>
+          <ul class="text-start space-y-2">
+            {
+              t.transport.sea.features.map((feature) => (
+                <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg
+                    class="w-4 h-4 text-success-500 me-2 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection lang={lang} />
+</BaseLayout>

@@ -1,0 +1,616 @@
+/* Custom Fonts - must be before @tailwind directives */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-gray-700 dark:text-gray-300 bg-white dark:bg-primary-950;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Vazirmatn font for Arabic and Persian */
+  html[lang="ar"] body,
+  html[lang="fa"] body {
+    font-family: 'Vazirmatn', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, 
+  html[lang="ar"] h4, html[lang="ar"] h5, html[lang="ar"] h6,
+  html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3, 
+  html[lang="fa"] h4, html[lang="fa"] h5, html[lang="fa"] h6 {
+    font-family: 'Vazirmatn', 'Playfair Display', Georgia, serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-primary-900 dark:text-white font-bold;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl leading-snug;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl leading-snug;
+  }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-400;
+  }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .section-title {
+    @apply text-center mb-12 md:mb-16;
+  }
+
+  .section-subtitle {
+    @apply text-accent-500 font-semibold uppercase tracking-wider text-sm mb-3;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium 
+           transition-all duration-300 transform hover:scale-105 focus:outline-none 
+           focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-900 text-white hover:bg-primary-800 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white dark:bg-primary-800 text-primary-900 dark:text-white border-2 border-primary-900 dark:border-primary-600
+           hover:bg-primary-900 hover:text-white dark:hover:bg-primary-700 focus:ring-primary-500;
+  }
+
+  .btn-accent {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600 focus:ring-accent-400;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  .card {
+    @apply bg-white dark:bg-primary-900 rounded-2xl shadow-card dark:shadow-none dark:border dark:border-primary-700 
+           transition-all duration-300 hover:shadow-card-hover dark:hover:border-primary-600 hover:-translate-y-1;
+  }
+
+  .card-dark {
+    @apply bg-primary-900 dark:bg-primary-800 text-white rounded-2xl shadow-card transition-all duration-300 
+           hover:shadow-card-hover hover:-translate-y-1;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-900 via-primary-700 to-accent-500 
+           dark:from-white dark:via-gray-200 dark:to-accent-400
+           bg-clip-text text-transparent;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700;
+  }
+
+  .overlay-dark {
+    @apply absolute inset-0 bg-primary-900/70 dark:bg-primary-950/80;
+  }
+
+  .overlay-gradient {
+    @apply absolute inset-0 bg-gradient-to-r from-primary-900/90 to-primary-900/50;
+  }
+
+  /* Service Card Specific */
+  .service-card {
+    @apply card p-6 md:p-8 text-center cursor-pointer;
+  }
+
+  .service-card-icon {
+    @apply w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6 
+           text-primary-900 dark:text-white group-hover:text-accent-500 transition-colors duration-300;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply relative text-primary-900 dark:text-gray-200 font-medium hover:text-accent-500 
+           after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 
+           after:bg-accent-500 after:transition-all after:duration-300 
+           hover:after:w-full;
+  }
+
+  .nav-link-active {
+    @apply text-accent-500 after:w-full;
+  }
+
+  /* Stats */
+  .stat-item {
+    @apply text-center p-6;
+  }
+
+  .stat-number {
+    @apply text-4xl md:text-5xl font-bold text-accent-500 mb-2;
+  }
+
+  .stat-label {
+    @apply text-sm md:text-base text-gray-600 dark:text-gray-400 uppercase tracking-wide;
+  }
+
+  /* Timeline (for events) */
+  .timeline-item {
+    @apply relative pl-8 pb-8 border-l-2 border-primary-200 dark:border-primary-700 last:pb-0;
+  }
+
+  .timeline-dot {
+    @apply absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-accent-500 border-4 border-white dark:border-primary-900;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-hero {
+    background-image: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(30, 58, 95, 0.85) 100%),
+                      url('/images/hero-bg.webp');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bg-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A227' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+.dark ::-webkit-scrollbar-track {
+  @apply bg-primary-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-400 rounded-full;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-primary-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-600;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-500;
+}
+
+/* Selection */
+::selection {
+  @apply bg-accent-500/30 text-primary-900;
+}
+
+.dark ::selection {
+  @apply bg-accent-500/40 text-white;
+}
+
+/* ========================================
+   RTL (Right-to-Left) Support
+   For Arabic (ar) and Persian/Farsi (fa)
+   ======================================== */
+
+/* Base RTL Direction */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Font Support */
+[dir="rtl"] body {
+  font-family: 'Noto Sans Arabic', 'Noto Sans', 'Inter', system-ui, sans-serif;
+}
+
+/* Navigation RTL */
+[dir="rtl"] .nav-link::after {
+  left: auto;
+  right: 0;
+}
+
+/* Flip Icons and Arrows */
+[dir="rtl"] .icon-flip {
+  transform: scaleX(-1);
+}
+
+/* RTL Spacing Utilities */
+[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* RTL space-x utilities - swap margins */
+[dir="rtl"] .space-x-1 > * + * {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+[dir="rtl"] .space-x-2 > * + * {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .space-x-3 > * + * {
+  margin-left: 0;
+  margin-right: 0.75rem;
+}
+
+[dir="rtl"] .space-x-4 > * + * {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+[dir="rtl"] .space-x-5 > * + * {
+  margin-left: 0;
+  margin-right: 1.25rem;
+}
+
+[dir="rtl"] .space-x-6 > * + * {
+  margin-left: 0;
+  margin-right: 1.5rem;
+}
+
+[dir="rtl"] .space-x-8 > * + * {
+  margin-left: 0;
+  margin-right: 2rem;
+}
+
+/* RTL margin utilities - swap left/right */
+[dir="rtl"] .ml-1 {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+[dir="rtl"] .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .ml-3 {
+  margin-left: 0;
+  margin-right: 0.75rem;
+}
+
+[dir="rtl"] .ml-4 {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+[dir="rtl"] .mr-1 {
+  margin-right: 0;
+  margin-left: 0.25rem;
+}
+
+[dir="rtl"] .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .mr-3 {
+  margin-right: 0;
+  margin-left: 0.75rem;
+}
+
+[dir="rtl"] .mr-4 {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* RTL padding utilities - swap left/right */
+[dir="rtl"] .pl-1 {
+  padding-left: 0;
+  padding-right: 0.25rem;
+}
+
+[dir="rtl"] .pl-2 {
+  padding-left: 0;
+  padding-right: 0.5rem;
+}
+
+[dir="rtl"] .pl-3 {
+  padding-left: 0;
+  padding-right: 0.75rem;
+}
+
+[dir="rtl"] .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+[dir="rtl"] .pr-1 {
+  padding-right: 0;
+  padding-left: 0.25rem;
+}
+
+[dir="rtl"] .pr-2 {
+  padding-right: 0;
+  padding-left: 0.5rem;
+}
+
+[dir="rtl"] .pr-3 {
+  padding-right: 0;
+  padding-left: 0.75rem;
+}
+
+[dir="rtl"] .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
+}
+
+/* RTL Flex Direction - Only for specific layout containers, not inline items */
+/* Note: Removed general .flex-row reversal as it breaks icon+text layouts */
+/* Use explicit rtl: utilities in Tailwind for components that need reversal */
+
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row;
+}
+
+/* RTL Grid */
+[dir="rtl"] .grid {
+  direction: rtl;
+}
+
+/* Timeline RTL */
+[dir="rtl"] .timeline-item {
+  padding-left: 0;
+  padding-right: 2rem;
+  border-left: none;
+  border-right-width: 2px;
+}
+
+[dir="rtl"] .timeline-dot {
+  left: auto;
+  right: -9px;
+}
+
+/* RTL Text Alignment */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* RTL Form Elements */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] input::placeholder,
+[dir="rtl"] textarea::placeholder {
+  text-align: right;
+}
+
+/* RTL Buttons with Icons */
+[dir="rtl"] .btn svg:first-child {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .btn svg:last-child {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* RTL Lists */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+/* RTL Checkboxes and Radio Buttons */
+[dir="rtl"] input[type="checkbox"],
+[dir="rtl"] input[type="radio"] {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* RTL Dropdown/Select Icons */
+[dir="rtl"] .select-icon {
+  left: 0.75rem;
+  right: auto;
+}
+
+/* RTL Border Radius */
+[dir="rtl"] .rounded-l-lg {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+[dir="rtl"] .rounded-r-lg {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+/* RTL Scrollbar */
+[dir="rtl"] ::-webkit-scrollbar {
+  direction: ltr;
+}
+
+/* RTL Card Content Alignment */
+[dir="rtl"] .card {
+  text-align: right;
+}
+
+/* RTL Hero Section */
+[dir="rtl"] .hero-content {
+  text-align: right;
+}
+
+/* RTL Footer */
+[dir="rtl"] .footer-links {
+  text-align: right;
+}
+
+/* RTL Mobile Menu */
+[dir="rtl"] .mobile-menu {
+  left: auto;
+  right: 0;
+  transform-origin: top right;
+}
+
+/* RTL Animations - Slide from right instead of left */
+[dir="rtl"] .slide-in-left {
+  animation-name: slideInRight;
+}
+
+[dir="rtl"] .slide-in-right {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* RTL Gradient Text */
+[dir="rtl"] .gradient-text {
+  @apply bg-gradient-to-l from-primary-900 via-primary-700 to-accent-500 
+         dark:from-white dark:via-gray-200 dark:to-accent-400;
+}
+
+/* RTL Service Cards */
+[dir="rtl"] .service-card {
+  text-align: right;
+}
+
+[dir="rtl"] .service-card-icon {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* RTL Stats */
+[dir="rtl"] .stat-item {
+  text-align: right;
+}
+
+/* RTL specific number formatting */
+[dir="rtl"] .ltr-nums {
+  direction: ltr;
+  display: inline-block;
+}
+
+/* Language Switcher */
+.language-switcher {
+  @apply relative;
+}
+
+.language-switcher-btn {
+  @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
+         text-primary-900 dark:text-white hover:bg-gray-100 dark:hover:bg-primary-800
+         transition-colors duration-200;
+}
+
+.language-dropdown {
+  @apply absolute top-full right-0 mt-2 py-2 w-48 bg-white dark:bg-primary-800
+         rounded-lg shadow-lg border border-gray-200 dark:border-primary-700
+         opacity-0 invisible transform -translate-y-2
+         transition-all duration-200 z-50;
+}
+
+[dir="rtl"] .language-dropdown {
+  right: auto;
+  left: 0;
+}
+
+.language-dropdown.open {
+  @apply opacity-100 visible translate-y-0;
+}
+
+.language-option {
+  @apply flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-200
+         hover:bg-gray-100 dark:hover:bg-primary-700 transition-colors duration-150;
+}
+
+.language-option.active {
+  @apply bg-accent-500/10 text-accent-500;
+}

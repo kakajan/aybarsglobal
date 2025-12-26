@@ -1,0 +1,355 @@
+---
+/**
+ * Dynamic language route for Industrial Metals page
+ * Handles: /tr/services/industrial-metals, /ar/services/industrial-metals, /fa/services/industrial-metals, /ru/services/industrial-metals
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import CTASection from '@/components/home/CTASection.astro'
+import {
+  type Language,
+  supportedLanguages,
+  defaultLang,
+  getTranslations,
+  getLocalizedPath,
+} from '@/i18n'
+
+export function getStaticPaths() {
+  return supportedLanguages
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({
+      params: { lang },
+      props: { lang: lang as Language },
+    }))
+}
+
+const { lang } = Astro.props
+const t = getTranslations(lang)
+const localizedHref = (path: string) => getLocalizedPath(path, lang)
+
+const service = t.services.mainServicesData.find(
+  (s) => s.slug === 'industrial-metals'
+)!
+
+const metalTypes = [
+  {
+    name: 'Rebar',
+    description: 'Reinforcing steel bars for construction projects',
+    icon: '🏗️',
+  },
+  {
+    name: 'Copper',
+    description: 'High-purity copper for electrical and industrial use',
+    icon: '🔧',
+  },
+  {
+    name: 'Aluminum',
+    description: 'Aluminum sheets, bars, and profiles for various applications',
+    icon: '📦',
+  },
+  {
+    name: 'Steel',
+    description: 'Structural steel and specialty steel products',
+    icon: '⚙️',
+  },
+]
+
+const industries = [
+  {
+    name: 'Construction',
+    description: 'Building materials and reinforcement',
+    icon: 'building',
+  },
+  {
+    name: 'Manufacturing',
+    description: 'Raw materials for production',
+    icon: 'factory',
+  },
+  {
+    name: 'Energy',
+    description: 'Components for power infrastructure',
+    icon: 'lightning',
+  },
+  {
+    name: 'Infrastructure',
+    description: 'Materials for public works',
+    icon: 'road',
+  },
+]
+---
+
+<BaseLayout
+  title={t.services.industrialMetals.title}
+  description={t.services.industrialMetals.fullDescription}
+  lang={lang}
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <nav
+          class="flex items-center space-x-2 rtl:space-x-reverse text-sm text-gray-300 mb-6"
+        >
+          <a href={localizedHref('/')} class="hover:text-white">{t.nav.home}</a>
+          <span>/</span>
+          <a href={localizedHref('/services')} class="hover:text-white"
+            >{t.nav.services}</a
+          >
+          <span>/</span>
+          <span class="text-accent-400">{t.nav.industrialMetals}</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          {t.services.industrialMetals.title}
+        </h1>
+        <p class="text-xl text-gray-300">
+          {t.services.industrialMetals.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-subtitle"
+            >{t.services.industrialMetals.shortTitle}</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-6"
+          >
+            {t.services.industrialMetals.title}
+          </h2>
+          <div
+            class="prose prose-lg text-gray-600 dark:text-gray-400 space-y-4"
+          >
+            <p>
+              {t.services.industrialMetals.fullDescription}
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {
+              service.features.map((feature) => (
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                  <svg
+                    class="w-5 h-5 text-accent-500 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">
+                    {feature}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="relative">
+          <div
+            class="bg-gradient-to-br from-gray-100 to-accent-50 dark:from-gray-800 dark:to-primary-900 rounded-3xl p-8 md:p-10"
+          >
+            <div
+              class="w-20 h-20 bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-2xl font-bold text-primary-900 dark:text-white text-center mb-4"
+            >
+              {t.services.features.qualityAssurance}
+            </h3>
+            <p class="text-center text-gray-600 dark:text-gray-400">
+              {t.services.whyChoose.qualityAssuranceDesc}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metal Types -->
+  <section class="section-padding bg-gray-50 dark:bg-primary-900">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.services.mainServices.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.services.industrialMetals.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        {
+          metalTypes.map((metal) => (
+            <div class="card p-6 text-center group hover:shadow-xl">
+              <div class="text-5xl mb-4">{metal.icon}</div>
+              <h3 class="text-xl font-bold text-primary-900 dark:text-white mb-2">
+                {metal.name}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">
+                {metal.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="grid grid-cols-2 gap-4">
+            {
+              service.features.map((feature, index) => (
+                <div class="p-4 bg-gray-50 dark:bg-primary-800 rounded-xl">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
+                    <svg
+                      class="w-5 h-5 text-accent-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-sm font-medium text-primary-900 dark:text-white">
+                      {feature}
+                    </span>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="section-subtitle">{t.services.whyChoose.subtitle}</span>
+          <h2
+            class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-6"
+          >
+            {t.services.whyChoose.title}
+          </h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-6">
+            {t.services.whyChoose.description}
+          </p>
+          <a href={localizedHref('/contact')} class="btn-primary">
+            {t.common.contactUs}
+            <svg
+              class="w-5 h-5 ms-2 icon-flip"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Served -->
+  <section class="section-padding bg-gray-900">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <span
+          class="text-gray-400 font-semibold uppercase tracking-wider text-sm"
+          >{t.sections.sectors.subtitle}</span
+        >
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-3">
+          {t.sections.sectors.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+          industries.map((industry) => (
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-colors">
+              <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg
+                  class="w-7 h-7 text-accent-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {industry.icon === 'building' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  )}
+                  {industry.icon === 'factory' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                    />
+                  )}
+                  {industry.icon === 'lightning' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  )}
+                  {industry.icon === 'road' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                    />
+                  )}
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">{industry.name}</h3>
+              <p class="text-gray-400 text-sm">{industry.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection lang={lang} />
+</BaseLayout>

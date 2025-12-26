@@ -1,0 +1,183 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { vision, companyInfo } from '@/data/company'
+---
+
+<BaseLayout
+  title="Our Vision - Shaping the Future of Trade"
+  description="AYBARS GLOBAL's vision is to bridge tradition and innovation to shape the future of international trade through sustainable growth, reliability, and integrity."
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <nav class="flex items-center gap-2 text-sm text-gray-300 mb-6">
+          <a href="/" class="hover:text-white">Home</a>
+          <span>/</span>
+          <a href="/about" class="hover:text-white">About</a>
+          <span>/</span>
+          <span class="text-accent-400">Vision</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          Our Vision
+        </h1>
+        <p class="text-xl text-accent-400 font-medium">
+          {vision.subtitle}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Content -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="prose prose-lg max-w-none">
+          <p
+            class="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8"
+          >
+            At AYBARS GLOBAL TRADING, our vision is to bridge tradition and
+            innovation to shape the future of international trade.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+            We aspire to be recognized as a trusted global leader that connects
+            markets, cultures, and opportunities through sustainable growth,
+            reliability, and integrity.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+            Guided by a deep commitment to quality and responsible progress, we
+            envision a world where trade is not just an exchange of goods, but a
+            partnership that drives development, trust, and shared prosperity
+            across nations.
+          </p>
+
+          <div
+            class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-800 dark:to-primary-900 rounded-3xl p-8 md:p-10 my-12"
+          >
+            <h3
+              class="text-2xl font-bold text-primary-900 dark:text-white mb-6"
+            >
+              Key Aspirations
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 bg-white dark:bg-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-soft dark:shadow-none"
+                >
+                  <svg
+                    class="w-5 h-5 text-accent-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary-900 dark:text-white">
+                    Global Leadership
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Recognized as a trusted leader in international trade
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 bg-white dark:bg-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-soft dark:shadow-none"
+                >
+                  <svg
+                    class="w-5 h-5 text-accent-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary-900 dark:text-white">
+                    Sustainable Growth
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Building lasting partnerships that benefit all
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 bg-white dark:bg-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-soft dark:shadow-none"
+                >
+                  <svg
+                    class="w-5 h-5 text-accent-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary-900 dark:text-white">
+                    Cultural Bridge
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Connecting diverse markets and cultures worldwide
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 bg-white dark:bg-primary-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-soft dark:shadow-none"
+                >
+                  <svg
+                    class="w-5 h-5 text-accent-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-primary-900 dark:text-white">
+                    Shared Prosperity
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Driving development and trust across nations
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div
+          class="flex justify-between items-center pt-8 border-t border-gray-200 dark:border-primary-700"
+        >
+          <a
+            href="/about"
+            class="text-gray-600 dark:text-gray-400 hover:text-primary-900 dark:hover:text-white transition-colors"
+          >
+            ← Back to About
+          </a>
+          <a href="/about/mission" class="btn-primary"> Our Mission → </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

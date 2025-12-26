@@ -1,0 +1,435 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { formatDate } from '@/utils/formatDate'
+import { defaultLang, getTranslations, getLocalizedPath } from '@/i18n'
+
+const lang = defaultLang
+const t = getTranslations(lang)
+const localizedHref = (path: string) => getLocalizedPath(path, lang)
+
+// Get press releases from translations
+const pressReleases = t.press.releases.map((release: any, index: number) => ({
+  ...release,
+  date: ['2024-12-15', '2024-11-28', '2024-10-15', '2024-09-01', '2024-07-20'][
+    index
+  ],
+}))
+
+const financialReleases = t.press.financialReports.map(
+  (report: any, index: number) => ({
+    ...report,
+    date: ['2024-10-30', '2024-07-28', '2024-03-15', '2024-04-25'][index],
+  })
+)
+---
+
+<BaseLayout
+  title={t.press.pageTitle}
+  description={t.press.pageDescription}
+  lang={lang}
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <span
+          class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-accent-400 text-sm font-medium mb-6"
+        >
+          {t.press.hero.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          {t.press.hero.title}
+        </h1>
+        <p class="text-xl text-gray-300">
+          {t.press.hero.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section
+    class="bg-white dark:bg-primary-950 border-b border-gray-100 dark:border-primary-800 sticky top-20 z-30"
+  >
+    <div class="container-custom">
+      <div class="flex items-center gap-8 rtl:gap-8 py-4 overflow-x-auto">
+        <a
+          href="#press-releases"
+          class="text-primary-900 dark:text-white font-medium whitespace-nowrap hover:text-accent-500 transition-colors"
+        >
+          {t.press.quickLinks.pressReleases}
+        </a>
+        <a
+          href="#financial-releases"
+          class="text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap hover:text-accent-500 transition-colors"
+        >
+          {t.press.quickLinks.financialReleases}
+        </a>
+        <a
+          href="#media-kit"
+          class="text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap hover:text-accent-500 transition-colors"
+        >
+          {t.press.quickLinks.mediaKit}
+        </a>
+        <a
+          href={localizedHref('/contact')}
+          class="text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap hover:text-accent-500 transition-colors"
+        >
+          {t.press.quickLinks.mediaContact}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Press Releases -->
+  <section
+    class="section-padding bg-white dark:bg-primary-950"
+    id="press-releases"
+  >
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.press.featured.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.press.featured.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+        {
+          pressReleases
+            .filter((p) => p.featured)
+            .map((release) => (
+              <article class="card p-0 overflow-hidden group">
+                <div class="bg-gradient-to-br from-primary-100 to-accent-50 dark:from-primary-800 dark:to-primary-900 p-6">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-primary-600 text-white rounded-full text-xs font-medium">
+                      {release.category}
+                    </span>
+                    <time class="text-sm text-gray-600 dark:text-gray-400">
+                      {formatDate(release.date)}
+                    </time>
+                  </div>
+                  <h3 class="text-xl font-bold text-primary-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
+                    {release.title}
+                  </h3>
+                </div>
+                <div class="p-6">
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    {release.excerpt}
+                  </p>
+                  <a
+                    href={localizedHref(`/press/releases/${release.id}`)}
+                    class="text-accent-500 font-medium hover:text-accent-600 inline-flex items-center"
+                  >
+                    {t.press.readMore}
+                    <svg
+                      class="w-4 h-4 ms-1 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- All Press Releases -->
+  <section class="section-padding bg-gray-50 dark:bg-primary-900">
+    <div class="container-custom">
+      <h3 class="text-2xl font-bold text-primary-900 dark:text-white mb-8">
+        {t.press.all}
+      </h3>
+
+      <div class="space-y-4">
+        {
+          pressReleases.map((release) => (
+            <article class="bg-white dark:bg-primary-800 rounded-xl p-6 shadow-soft dark:shadow-none dark:border dark:border-primary-700 hover:shadow-lg transition-all group">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex-grow">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="px-2 py-1 bg-gray-100 dark:bg-primary-700 text-gray-600 dark:text-gray-300 rounded text-xs font-medium">
+                      {release.category}
+                    </span>
+                    <time class="text-sm text-gray-500 dark:text-gray-400">
+                      {formatDate(release.date)}
+                    </time>
+                  </div>
+                  <h4 class="text-lg font-bold text-primary-900 dark:text-white group-hover:text-accent-500 transition-colors">
+                    {release.title}
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                    {release.excerpt}
+                  </p>
+                </div>
+                <a
+                  href={`/press/releases/${release.id}`}
+                  class="flex-shrink-0 text-accent-500 hover:text-accent-600"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Financial Releases -->
+  <section
+    class="section-padding bg-white dark:bg-primary-950"
+    id="financial-releases"
+  >
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.press.financial.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.press.financial.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+        {
+          financialReleases.map((release) => (
+            <article class="card p-6 group hover:shadow-xl">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent-100 dark:bg-accent-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg
+                    class="w-6 h-6 text-accent-600 dark:text-accent-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-grow">
+                  <span class="text-xs text-accent-500 font-medium uppercase tracking-wider">
+                    {release.type}
+                  </span>
+                  <h4 class="text-lg font-bold text-primary-900 dark:text-white mt-1 group-hover:text-accent-500 transition-colors">
+                    {release.title}
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                    {release.excerpt}
+                  </p>
+                  <div class="flex items-center justify-between mt-4">
+                    <time class="text-sm text-gray-500 dark:text-gray-400">
+                      {formatDate(release.date)}
+                    </time>
+                    <a
+                      href={localizedHref(`/press/financial/${release.id}`)}
+                      class="text-accent-500 font-medium text-sm hover:text-accent-600 inline-flex items-center"
+                    >
+                      {t.press.viewReport}
+                      <svg
+                        class="w-4 h-4 ms-1 rtl:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-8">
+        <a href={localizedHref('/press/financial')} class="btn-secondary">
+          {t.press.financial.viewAll}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Kit -->
+  <section class="section-padding bg-primary-900" id="media-kit">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span
+            class="text-accent-400 font-semibold uppercase tracking-wider text-sm"
+            >{t.press.mediaKit.subtitle}</span
+          >
+          <h2 class="text-3xl md:text-4xl font-bold text-white mt-3 mb-6">
+            {t.press.mediaKit.title}
+          </h2>
+          <p class="text-gray-300 mb-8">
+            {t.press.mediaKit.description}
+          </p>
+
+          <div class="space-y-4">
+            <a
+              href="#"
+              class="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-accent-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-white font-semibold">
+                  {t.press.mediaKit.brandAssets}
+                </h4>
+                <p class="text-gray-400 text-sm">SVG, PNG, EPS</p>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              class="flex items-center gap-4 rtl:gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-accent-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-white font-semibold">
+                  {t.press.mediaKit.factSheet}
+                </h4>
+                <p class="text-gray-400 text-sm">PDF</p>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              class="flex items-center gap-4 rtl:gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-colors"
+            >
+              <div
+                class="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-accent-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-white font-semibold">
+                  {t.press.mediaKit.pressKit}
+                </h4>
+                <p class="text-gray-400 text-sm">ZIP</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8">
+          <h3 class="text-xl font-bold text-white mb-6">
+            {t.press.quickLinks.mediaContact}
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <p class="text-gray-400 text-sm">{t.contact.hero.title}:</p>
+              <a
+                href="mailto:press@aybarsglobal.com"
+                class="text-accent-400 font-medium hover:text-accent-300 text-left"
+                dir="ltr"
+              >
+                press@aybarsglobal.com
+              </a>
+            </div>
+            <div>
+              <p class="text-gray-400 text-sm">{t.contact.info.phone}:</p>
+              <a
+                href="tel:+902128302838"
+                class="text-accent-400 font-medium hover:text-accent-300 ltr-nums text-left"
+                dir="ltr"
+              >
+                +90 212 830 28 38
+              </a>
+            </div>
+            <div class="pt-4 border-t border-white/10">
+              <p class="text-gray-300 text-sm">
+                <a
+                  href={localizedHref('/contact')}
+                  class="text-accent-400 hover:text-accent-300"
+                  >{t.common.contactUs}</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

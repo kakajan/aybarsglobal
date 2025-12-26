@@ -1,0 +1,182 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { mission, companyInfo } from '@/data/company'
+---
+
+<BaseLayout
+  title="Our Mission - Empowering Global Trade"
+  description="AYBARS GLOBAL's mission is to empower global trade through innovation, trust, and excellence. Creating sustainable trading ecosystems worldwide."
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <nav class="flex items-center gap-2 text-sm text-gray-300 mb-6">
+          <a href="/" class="hover:text-white">Home</a>
+          <span>/</span>
+          <a href="/about" class="hover:text-white">About</a>
+          <span>/</span>
+          <span class="text-accent-400">Mission</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          Our Mission
+        </h1>
+        <p class="text-xl text-accent-400 font-medium">
+          {mission.subtitle}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Content -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="prose prose-lg max-w-none">
+          <p
+            class="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8"
+          >
+            At AYBARS GLOBAL TRADING, our mission is to empower global trade
+            through innovation, trust, and excellence.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+            We strive to connect producers and markets worldwide by delivering
+            premium food materials, ensuring seamless logistics solutions, and
+            maintaining integrity in every transaction.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+            Our goal is to create a sustainable and transparent trading
+            ecosystem that supports economic growth, strengthens international
+            partnerships, and delivers long-term value for our clients and
+            communities around the world.
+          </p>
+
+          <!-- Mission Pillars -->
+          <div class="my-12">
+            <h3
+              class="text-2xl font-bold text-primary-900 dark:text-white mb-8"
+            >
+              Our Mission Pillars
+            </h3>
+
+            <div class="space-y-6">
+              <div
+                class="flex items-start gap-6 p-6 bg-gray-50 dark:bg-primary-800 rounded-2xl"
+              >
+                <div
+                  class="w-14 h-14 bg-primary-600 rounded-xl flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4
+                    class="text-lg font-bold text-primary-900 dark:text-white mb-2"
+                  >
+                    Innovation
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400">
+                    Embracing cutting-edge technologies and methods to
+                    continuously improve our services and deliver superior
+                    solutions to our global partners.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start gap-6 p-6 bg-gray-50 dark:bg-primary-800 rounded-2xl"
+              >
+                <div
+                  class="w-14 h-14 bg-accent-500 rounded-xl flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4
+                    class="text-lg font-bold text-primary-900 dark:text-white mb-2"
+                  >
+                    Trust
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400">
+                    Building relationships based on transparency, reliability,
+                    and consistent delivery that our partners can depend on for
+                    their critical operations.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start gap-6 p-6 bg-gray-50 dark:bg-primary-800 rounded-2xl"
+              >
+                <div
+                  class="w-14 h-14 bg-success-500 rounded-xl flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4
+                    class="text-lg font-bold text-primary-900 dark:text-white mb-2"
+                  >
+                    Excellence
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400">
+                    Striving for the highest standards in every operation, from
+                    sourcing premium materials to executing flawless logistics
+                    across global supply chains.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div
+          class="flex justify-between items-center pt-8 border-t border-gray-200 dark:border-primary-700"
+        >
+          <a href="/about/vision" class="btn-secondary"> ← Our Vision </a>
+          <a href="/services" class="btn-primary"> Our Services → </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

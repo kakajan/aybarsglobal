@@ -1,8 +1,11 @@
 {
-	"folders": [
-		{
-			"path": "Landing"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "Landing"
+    },
+    {
+      "path": "aybars-global"
+    }
+  ],
+  "settings": {}
 }

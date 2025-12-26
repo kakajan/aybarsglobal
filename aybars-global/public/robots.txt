@@ -1,0 +1,26 @@
+# Robots.txt for AYBARS GLOBAL TRADING
+# https://www.aybarsglobal.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.aybarsglobal.com/sitemap-index.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Disallow admin/private areas (if any)
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_astro/
+
+# Block specific bots from overloading the site
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10

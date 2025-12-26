@@ -1,0 +1,180 @@
+---
+import { companyInfo } from '@/data/company'
+import {
+  type Language,
+  getLangFromUrl,
+  getTranslations,
+  supportedLanguages,
+  defaultLang,
+} from '@/i18n'
+
+interface Props {
+  type?:
+    | 'Organization'
+    | 'LocalBusiness'
+    | 'WebSite'
+    | 'Article'
+    | 'Event'
+    | 'Product'
+    | 'BreadcrumbList'
+  data?: Record<string, any>
+  lang?: Language
+}
+
+const { type = 'Organization', data = {} } = Astro.props
+
+// Get current language
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url)
+const t = getTranslations(currentLang)
+
+const baseUrl = 'https://aybarsglobal.com'
+
+// Map language codes to full language names for availableLanguage
+const languageNames: Record<Language, string> = {
+  en: 'English',
+  tr: 'Turkish',
+  ar: 'Arabic',
+  fa: 'Persian',
+  ru: 'Russian',
+}
+
+// Get locale for inLanguage
+const localeMap: Record<Language, string> = {
+  en: 'en-US',
+  tr: 'tr-TR',
+  ar: 'ar-SA',
+  fa: 'fa-IR',
+  ru: 'ru-RU',
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${baseUrl}/#organization`,
+  name: t.meta.siteName,
+  alternateName: companyInfo.shortName,
+  url: baseUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${baseUrl}/images/logo.svg`,
+    width: 200,
+    height: 60,
+  },
+  description: t.meta.siteDescription,
+  foundingDate: companyInfo.founded.toString(),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: companyInfo.contact.address.street,
+    addressLocality: companyInfo.contact.address.city,
+    addressRegion: companyInfo.contact.address.region,
+    postalCode: companyInfo.contact.address.postalCode,
+    addressCountry: 'TR',
+  },
+  contactPoint: companyInfo.contact.phones.map((phone) => ({
+    '@type': 'ContactPoint',
+    telephone: phone,
+    contactType: 'customer service',
+    availableLanguage: supportedLanguages.map((l) => languageNames[l]),
+  })),
+  sameAs: Object.values(companyInfo.social),
+  areaServed: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: 41.0082,
+      longitude: 28.9784,
+    },
+    geoRadius: '10000',
+  },
+  knowsAbout: [
+    'International Trade',
+    'Logistics',
+    'Grain Procurement',
+    'Industrial Metals',
+    'Import/Export',
+    'Supply Chain Management',
+  ],
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${baseUrl}/#website`,
+  url: baseUrl,
+  name: t.meta.siteName,
+  description: t.meta.siteDescription,
+  inLanguage: localeMap[currentLang],
+  publisher: {
+    '@id': `${baseUrl}/#organization`,
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${baseUrl}/search?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+}
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${baseUrl}/#localbusiness`,
+  name: t.meta.siteName,
+  image: `${baseUrl}/images/office.webp`,
+  priceRange: '$$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: companyInfo.contact.address.street,
+    addressLocality: companyInfo.contact.address.city,
+    addressRegion: companyInfo.contact.address.region,
+    postalCode: companyInfo.contact.address.postalCode,
+    addressCountry: 'TR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 41.1171,
+    longitude: 29.0168,
+  },
+  telephone: companyInfo.contact.phones[0],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00',
+  },
+}
+
+function getSchema() {
+  switch (type) {
+    case 'Organization':
+      return organizationSchema
+    case 'WebSite':
+      return websiteSchema
+    case 'LocalBusiness':
+      return localBusinessSchema
+    case 'Article':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        ...data,
+      }
+    case 'Event':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Event',
+        ...data,
+      }
+    case 'BreadcrumbList':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: data.items || [],
+      }
+    default:
+      return organizationSchema
+  }
+}
+
+const schema = getSchema()
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

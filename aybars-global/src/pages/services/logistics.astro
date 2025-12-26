@@ -1,0 +1,306 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import CTASection from '@/components/home/CTASection.astro'
+import { mainServices, transportServices } from '@/data/services'
+
+const service = mainServices.find((s) => s.slug === 'logistics')!
+---
+
+<BaseLayout
+  title="International Transportation & Logistics Services"
+  description="AYBARS GLOBAL's Logistics Division offers comprehensive land, sea, and air transportation services. Connecting markets worldwide with reliable, efficient delivery."
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <nav class="flex items-center gap-2 text-sm text-gray-300 mb-6">
+          <a href="/" class="hover:text-white">Home</a>
+          <span>/</span>
+          <a href="/services" class="hover:text-white">Services</a>
+          <span>/</span>
+          <span class="text-accent-400">Logistics</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          {service.title}
+        </h1>
+        <p class="text-xl text-gray-300">
+          Connecting Markets, Delivering Excellence
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-subtitle">Logistics & Global Trade Division</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-6"
+          >
+            Seamless International Operations
+          </h2>
+          <div
+            class="prose prose-lg text-gray-600 dark:text-gray-400 space-y-4"
+          >
+            <p>
+              At AYBARS GLOBAL, our Logistics and Global Trade Division stands
+              at the core of seamless international operations. With a deep
+              understanding of global supply chains, we ensure the efficient
+              movement of goods across borders — connecting producers,
+              distributors, and markets worldwide.
+            </p>
+            <p>
+              Through strategic partnerships, innovative logistics solutions,
+              and unwavering commitment to reliability, we deliver not only
+              products but also trust and performance across every route we
+              navigate.
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {
+              service.features.map((feature) => (
+                <div class="flex items-center gap-3">
+                  <svg
+                    class="w-5 h-5 text-accent-500 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">
+                    {feature}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="relative">
+          <div
+            class="bg-gradient-to-br from-primary-100 to-accent-50 dark:from-primary-800 dark:to-primary-900 rounded-3xl p-8 md:p-10"
+          >
+            <div
+              class="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-2xl font-bold text-primary-900 dark:text-white text-center mb-4"
+            >
+              Global Reach
+            </h3>
+            <p class="text-center text-gray-600 dark:text-gray-400">
+              Operating across 50+ countries with reliable partners and modern
+              infrastructure
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transportation Options -->
+  <section
+    id="transport-options"
+    class="section-padding bg-gray-50 dark:bg-primary-900"
+  >
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">Shipping Solutions</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          Choose Your Transport Mode
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        {
+          transportServices.map((transport) => (
+            <div
+              id={transport.slug}
+              class="card p-8 text-center group hover:shadow-xl"
+            >
+              <div
+                class="w-16 h-16 mx-auto mb-6 bg-primary-100 rounded-2xl flex items-center justify-center 
+                        group-hover:bg-primary-900 transition-colors"
+              >
+                <svg
+                  class="w-8 h-8 text-primary-600 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {transport.icon === 'truck' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
+                    />
+                  )}
+                  {transport.icon === 'plane' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                    />
+                  )}
+                  {transport.icon === 'ship' && (
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M3 17h18M5 17l-2 4M19 17l2 4M12 3v10M7 8h10l-2 9H9L7 8z"
+                    />
+                  )}
+                </svg>
+              </div>
+
+              <h3 class="text-xl font-bold text-primary-900 dark:text-white mb-2">
+                {transport.title}
+              </h3>
+              <p class="text-accent-500 font-medium mb-4">
+                {transport.description}
+              </p>
+              <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
+                {transport.fullDescription}
+              </p>
+
+              <ul class="text-left space-y-2">
+                {transport.features.map((feature) => (
+                  <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                    <svg
+                      class="w-4 h-4 text-success-500 mr-2 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">How We Work</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          Our Logistics Process
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12">
+        <div class="text-center">
+          <div
+            class="w-16 h-16 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <span
+              class="text-2xl font-bold text-primary-600 dark:text-primary-300"
+              >01</span
+            >
+          </div>
+          <h4 class="font-bold text-primary-900 dark:text-white mb-2">
+            Consultation
+          </h4>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Understand your logistics needs and requirements
+          </p>
+        </div>
+        <div class="text-center">
+          <div
+            class="w-16 h-16 bg-accent-100 dark:bg-accent-900/30 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <span
+              class="text-2xl font-bold text-accent-600 dark:text-accent-400"
+              >02</span
+            >
+          </div>
+          <h4 class="font-bold text-primary-900 dark:text-white mb-2">
+            Planning
+          </h4>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Design optimal routes and transportation solutions
+          </p>
+        </div>
+        <div class="text-center">
+          <div
+            class="w-16 h-16 bg-success-100 dark:bg-success-900/30 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <span
+              class="text-2xl font-bold text-success-600 dark:text-success-400"
+              >03</span
+            >
+          </div>
+          <h4 class="font-bold text-primary-900 dark:text-white mb-2">
+            Execution
+          </h4>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Handle all logistics, customs, and documentation
+          </p>
+        </div>
+        <div class="text-center">
+          <div
+            class="w-16 h-16 bg-primary-100 dark:bg-primary-800 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <span
+              class="text-2xl font-bold text-primary-600 dark:text-primary-300"
+              >04</span
+            >
+          </div>
+          <h4 class="font-bold text-primary-900 dark:text-white mb-2">
+            Delivery
+          </h4>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Safe and on-time delivery with full tracking
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection />
+</BaseLayout>

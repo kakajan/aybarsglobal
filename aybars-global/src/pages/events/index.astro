@@ -1,0 +1,287 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import CTASection from '@/components/home/CTASection.astro'
+import { formatDate } from '@/utils/formatDate'
+import { defaultLang, getTranslations, getLocalizedPath } from '@/i18n'
+
+const lang = defaultLang
+const t = getTranslations(lang)
+const localizedHref = (path: string) => getLocalizedPath(path, lang)
+
+// Get events from translations
+const upcomingEvents = t.events.upcomingEvents.map((event: any) => ({
+  ...event,
+  type: t.events.types[event.type as keyof typeof t.events.types] || event.type,
+}))
+
+const pastEvents = t.events.pastEvents.map((event: any) => ({
+  ...event,
+  type: t.events.types[event.type as keyof typeof t.events.types] || event.type,
+}))
+---
+
+<BaseLayout
+  title={t.events.pageTitle}
+  description={t.events.pageDescription}
+  lang={lang}
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <span
+          class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-accent-400 text-sm font-medium mb-6"
+        >
+          {t.events.hero.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          {t.events.hero.title}
+        </h1>
+        <p class="text-xl text-gray-300">
+          {t.events.hero.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Events -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.events.featured.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.events.featured.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+        {
+          upcomingEvents
+            .filter((e) => e.featured)
+            .map((event) => (
+              <div class="card p-0 overflow-hidden group">
+                <div class="bg-gradient-to-br from-primary-600 to-primary-800 p-6">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                      {event.type}
+                    </span>
+                    <span class="text-accent-300 text-sm font-medium">
+                      {t.events.featured.featuredLabel}
+                    </span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-2">
+                    {event.title}
+                  </h3>
+                  <div class="flex items-center gap-4 text-gray-200 text-sm">
+                    <span class="flex items-center">
+                      <svg
+                        class="w-4 h-4 me-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                      {formatDate(event.date, lang)} -{' '}
+                      {formatDate(event.endDate, lang)}
+                    </span>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-4">
+                    <svg
+                      class="w-4 h-4 me-2 text-accent-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                    </svg>
+                    {event.location}
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 mb-6">
+                    {event.description}
+                  </p>
+                  <a
+                    href={localizedHref('/contact')}
+                    class="btn-primary text-sm"
+                  >
+                    {t.events.cta}
+                    <svg
+                      class="w-4 h-4 ms-2 rtl:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- All Upcoming Events -->
+  <section class="section-padding bg-gray-50 dark:bg-primary-900">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.events.upcoming.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.events.upcoming.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        {
+          upcomingEvents.map((event) => (
+            <div class="card p-6 group hover:shadow-xl">
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-400 rounded-full text-xs font-medium">
+                  {event.type}
+                </span>
+                <div class="text-end ltr-nums">
+                  <div class="text-2xl font-bold text-primary-900 dark:text-white">
+                    {new Date(event.date).getDate()}
+                  </div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400 uppercase">
+                    {new Date(event.date).toLocaleDateString(
+                      lang === 'fa' ? 'fa-IR' : lang === 'ar' ? 'ar-SA' : lang,
+                      {
+                        month: 'short',
+                        year: 'numeric',
+                      }
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="text-lg font-bold text-primary-900 dark:text-white mb-2 group-hover:text-accent-500 transition-colors">
+                {event.title}
+              </h3>
+
+              <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-3">
+                <svg
+                  class="w-4 h-4 me-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                </svg>
+                {event.location}
+              </div>
+
+              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                {event.description}
+              </p>
+
+              <a
+                href={localizedHref('/contact')}
+                class="text-accent-500 font-medium text-sm hover:text-accent-600 inline-flex items-center"
+              >
+                {t.events.learnMore}
+                <svg
+                  class="w-4 h-4 ms-1 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Events -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.events.past.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.events.past.title}
+        </h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto mt-12">
+        {
+          pastEvents.map((event) => (
+            <div class="flex items-start gap-6 p-6 border-b border-gray-100 dark:border-primary-700 last:border-0 hover:bg-gray-50 dark:hover:bg-primary-900 transition-colors">
+              <div class="flex-shrink-0 text-center ltr-nums">
+                <div class="text-2xl font-bold text-gray-400 dark:text-gray-500">
+                  {new Date(event.date).getDate()}
+                </div>
+                <div class="text-xs text-gray-400 dark:text-gray-500 uppercase">
+                  {new Date(event.date).toLocaleDateString(
+                    lang === 'fa' ? 'fa-IR' : lang === 'ar' ? 'ar-SA' : lang,
+                    {
+                      month: 'short',
+                      year: 'numeric',
+                    }
+                  )}
+                </div>
+              </div>
+              <div>
+                <span class="px-2 py-1 bg-gray-100 dark:bg-primary-800 text-gray-600 dark:text-gray-400 rounded text-xs font-medium mb-2 inline-block">
+                  {event.type}
+                </span>
+                <h3 class="text-lg font-bold text-primary-900 dark:text-white mb-1">
+                  {event.title}
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  {event.location}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                  {event.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection />
+</BaseLayout>

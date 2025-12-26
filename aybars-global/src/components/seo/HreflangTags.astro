@@ -1,0 +1,41 @@
+---
+/**
+ * HreflangTags Component
+ * Generates hreflang alternate link tags for multi-language SEO
+ */
+import {
+  languages,
+  type Language,
+  getAllLocalizedPaths,
+  defaultLang,
+} from '@/i18n'
+
+interface Props {
+  currentLang: Language
+  currentPath: string
+}
+
+const { currentLang, currentPath } = Astro.props
+
+// Get all localized paths for the current page
+const localizedPaths = getAllLocalizedPaths(currentPath)
+
+// Get the locale format for each language
+const localeMap: Record<Language, string> = {
+  en: 'en',
+  tr: 'tr',
+  ar: 'ar',
+  fa: 'fa',
+  ru: 'ru',
+}
+---
+
+{/* Generate hreflang tags for all languages */}
+{
+  Object.entries(localizedPaths).map(([lang, url]) => (
+    <link rel="alternate" hreflang={localeMap[lang as Language]} href={url} />
+  ))
+}
+
+{/* x-default points to the default language version */}
+<link rel="alternate" hreflang="x-default" href={localizedPaths[defaultLang]} />

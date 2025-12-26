@@ -1,0 +1,186 @@
+---
+import { companyInfo } from '@/data/company'
+import {
+  type Language,
+  getTranslations,
+  defaultLang,
+  getLocalizedPath,
+} from '@/i18n'
+
+interface Props {
+  lang?: Language
+}
+
+const { lang = defaultLang } = Astro.props
+const t = getTranslations(lang)
+---
+
+<section class="section-padding bg-gray-50 dark:bg-primary-900 overflow-hidden">
+  <div class="container-custom">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Content -->
+      <div>
+        <span class="section-subtitle">{t.sections.about.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-6"
+        >
+          {t.sections.about.title}
+        </h2>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+          {t.sections.about.description1}
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+          {t.sections.about.description2}
+        </p>
+
+        <!-- Vision & Mission Preview -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+          <div
+            class="bg-white dark:bg-primary-800 rounded-2xl p-6 shadow-soft dark:shadow-none dark:border dark:border-primary-700"
+          >
+            <div
+              class="w-12 h-12 bg-primary-100 dark:bg-primary-700 rounded-xl flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                ></path>
+              </svg>
+            </div>
+            <h4 class="font-bold text-primary-900 dark:text-white mb-2">
+              {t.sections.about.vision}
+            </h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {t.sections.about.visionText}
+            </p>
+            <a
+              href={getLocalizedPath('/about', lang)}
+              class="text-sm text-accent-500 hover:text-accent-600 font-medium mt-3 inline-block"
+            >
+              {t.sections.about.readMore}
+            </a>
+          </div>
+
+          <div
+            class="bg-white dark:bg-primary-800 rounded-2xl p-6 shadow-soft dark:shadow-none dark:border dark:border-primary-700"
+          >
+            <div
+              class="w-12 h-12 bg-accent-100 dark:bg-accent-900/30 rounded-xl flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-accent-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h4 class="font-bold text-primary-900 dark:text-white mb-2">
+              {t.sections.about.mission}
+            </h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {t.sections.about.missionText}
+            </p>
+            <a
+              href={getLocalizedPath('/about', lang)}
+              class="text-sm text-accent-500 hover:text-accent-600 font-medium mt-3 inline-block"
+            >
+              {t.sections.about.readMore}
+            </a>
+          </div>
+        </div>
+
+        <a href={getLocalizedPath('/about', lang)} class="btn-secondary">
+          {t.sections.about.learnMore}
+          <svg
+            class="w-5 h-5 ml-2 rtl:mr-2 rtl:ml-0 rtl:rotate-180"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stats & Visual -->
+      <div class="relative">
+        <!-- Background Shape -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary-100 to-accent-50 rounded-[3rem] transform rotate-3 rtl:-rotate-3"
+        >
+        </div>
+
+        <!-- Stats Grid -->
+        <div
+          class="relative bg-white dark:bg-primary-800 rounded-[2.5rem] p-8 md:p-10 shadow-lg dark:shadow-none dark:border dark:border-primary-700"
+        >
+          <div class="grid grid-cols-2 gap-6">
+            <div
+              class="stat-item border-b border-gray-100 dark:border-primary-700 pb-6"
+            >
+              <div class="stat-number">{t.stats.countries}</div>
+              <div class="stat-label">{t.stats.countriesLabel}</div>
+            </div>
+            <div
+              class="stat-item border-b border-gray-100 dark:border-primary-700 pb-6"
+            >
+              <div class="stat-number">{t.stats.products}</div>
+              <div class="stat-label">{t.stats.productsLabel}</div>
+            </div>
+            <div class="stat-item pt-2">
+              <div class="stat-number">{t.stats.partners}</div>
+              <div class="stat-label">{t.stats.partnersLabel}</div>
+            </div>
+            <div class="stat-item pt-2">
+              <div class="stat-number">{t.stats.experience}</div>
+              <div class="stat-label">{t.stats.experienceLabel}</div>
+            </div>
+          </div>
+
+          <!-- Badge -->
+          <div
+            class="absolute -top-4 -right-4 rtl:-left-4 rtl:right-auto bg-accent-500 text-white px-6 py-3 rounded-2xl shadow-lg"
+          >
+            <div class="text-2xl font-bold">Since</div>
+            <div class="text-sm">{companyInfo.founded}</div>
+          </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div
+          class="absolute -bottom-6 -left-6 rtl:-right-6 rtl:left-auto w-24 h-24 bg-primary-200 rounded-full opacity-50"
+        >
+        </div>
+        <div
+          class="absolute top-1/2 -right-8 rtl:-left-8 rtl:right-auto w-16 h-16 bg-accent-200 rounded-full opacity-50"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

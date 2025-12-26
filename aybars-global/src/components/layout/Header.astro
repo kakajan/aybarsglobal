@@ -1,0 +1,263 @@
+---
+import { companyInfo } from '@/data/company'
+import DarkModeToggle from './DarkModeToggle.astro'
+import LanguageSwitcher from '@/components/common/LanguageSwitcher.astro'
+import {
+  type Language,
+  getLangFromUrl,
+  getTranslations,
+  getLocalizedPath,
+  isRTL,
+} from '@/i18n'
+
+// Get current language from URL
+const currentLang = getLangFromUrl(Astro.url)
+const t = getTranslations(currentLang)
+const isRtl = isRTL(currentLang)
+
+// Helper to create localized href
+const localizedHref = (path: string) => getLocalizedPath(path, currentLang)
+
+const navLinks = [
+  { name: t.nav.home, href: localizedHref('/') },
+  {
+    name: t.nav.about,
+    href: localizedHref('/about'),
+    children: [
+      { name: t.nav.aboutUs, href: localizedHref('/about') },
+      { name: t.nav.vision, href: localizedHref('/about/vision') },
+      { name: t.nav.mission, href: localizedHref('/about/mission') },
+    ],
+  },
+  {
+    name: t.nav.services,
+    href: localizedHref('/services'),
+    children: [
+      { name: t.nav.allServices, href: localizedHref('/services') },
+      { name: t.nav.logistics, href: localizedHref('/services/logistics') },
+      {
+        name: t.nav.grainSupply,
+        href: localizedHref('/services/grain-supply'),
+      },
+      {
+        name: t.nav.industrialMetals,
+        href: localizedHref('/services/industrial-metals'),
+      },
+    ],
+  },
+  { name: t.nav.company, href: localizedHref('/company') },
+  { name: t.nav.events, href: localizedHref('/events') },
+  { name: t.nav.press, href: localizedHref('/press') },
+  { name: t.nav.contact, href: localizedHref('/contact') },
+]
+
+const currentPath = Astro.url.pathname
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-primary-950/95 backdrop-blur-md shadow-soft transition-all duration-300"
+  id="main-header"
+>
+  <nav class="container-custom">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-3 group">
+        <img
+          src="/images/logo.svg"
+          alt={companyInfo.name}
+          class="h-10 w-auto transition-transform group-hover:scale-105"
+        />
+        <div class="hidden sm:block">
+          <span
+            class="block text-lg font-bold text-primary-900 dark:text-white leading-tight"
+            >AYBARS</span
+          >
+          <span
+            class="block text-xs text-accent-500 font-semibold tracking-wider"
+            >GLOBAL TRADING</span
+          >
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-1">
+        {
+          navLinks.map((link) => (
+            <div class="relative group">
+              <a
+                href={link.href}
+                class={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+                ${
+                  currentPath === link.href ||
+                  currentPath.startsWith(link.href + '/')
+                    ? 'text-accent-500 bg-accent-50 dark:bg-accent-500/10'
+                    : 'text-primary-900 dark:text-gray-200 hover:text-accent-500 hover:bg-gray-50 dark:hover:bg-white/5'
+                }`}
+              >
+                {link.name}
+                {link.children && (
+                  <svg
+                    class="inline-block w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                )}
+              </a>
+
+              {link.children && (
+                <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div class="bg-white dark:bg-primary-900 rounded-xl shadow-lg border border-gray-100 dark:border-primary-700 py-2 min-w-[220px]">
+                    {link.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class={`block px-4 py-2.5 text-sm transition-colors
+                        ${
+                          currentPath === child.href
+                            ? 'text-accent-500 bg-accent-50 dark:bg-accent-500/10'
+                            : 'text-gray-700 dark:text-gray-300 hover:text-accent-500 hover:bg-gray-50 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        {child.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- CTA Button & Dark Mode Toggle & Language Switcher -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <LanguageSwitcher currentLang={currentLang} currentPath={currentPath} />
+        <DarkModeToggle />
+        <a href={localizedHref('/contact')} class="btn-primary text-sm">
+          {t.nav.getQuote}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex lg:hidden items-center space-x-2">
+        <LanguageSwitcher currentLang={currentLang} currentPath={currentPath} />
+        <DarkModeToggle />
+        <button
+          type="button"
+          class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-primary-800 transition-colors"
+          id="mobile-menu-toggle"
+          aria-label="Toggle mobile menu"
+        >
+          <svg
+            class="w-6 h-6 text-primary-900 dark:text-white"
+            id="menu-open-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg
+            class="w-6 h-6 text-primary-900 dark:text-white hidden"
+            id="menu-close-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="lg:hidden hidden" id="mobile-menu">
+      <div class="py-4 border-t border-gray-100 dark:border-primary-700">
+        {
+          navLinks.map((link) => (
+            <div class="mobile-nav-item">
+              <a
+                href={link.href}
+                class={`block px-4 py-3 text-base font-medium rounded-lg transition-colors
+                ${
+                  currentPath === link.href
+                    ? 'text-accent-500 bg-accent-50 dark:bg-accent-500/10'
+                    : 'text-primary-900 dark:text-gray-200 hover:text-accent-500 hover:bg-gray-50 dark:hover:bg-white/5'
+                }`}
+              >
+                {link.name}
+              </a>
+              {link.children && (
+                <div class="pl-4 space-y-1 mt-1">
+                  {link.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class={`block px-4 py-2 text-sm rounded-lg transition-colors
+                      ${
+                        currentPath === child.href
+                          ? 'text-accent-500 bg-accent-50 dark:bg-accent-500/10'
+                          : 'text-gray-600 dark:text-gray-400 hover:text-accent-500 hover:bg-gray-50 dark:hover:bg-white/5'
+                      }`}
+                    >
+                      {child.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        }
+        <div class="mt-4 px-4">
+          <a
+            href={localizedHref('/contact')}
+            class="btn-primary w-full text-center text-sm"
+          >
+            {t.nav.getQuote}
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle')
+  const mobileMenu = document.getElementById('mobile-menu')
+  const menuOpenIcon = document.getElementById('menu-open-icon')
+  const menuCloseIcon = document.getElementById('menu-close-icon')
+
+  mobileMenuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden')
+    menuOpenIcon?.classList.toggle('hidden')
+    menuCloseIcon?.classList.toggle('hidden')
+  })
+
+  // Header scroll effect
+  const header = document.getElementById('main-header')
+  let lastScrollY = window.scrollY
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      header?.classList.add('shadow-md')
+    } else {
+      header?.classList.remove('shadow-md')
+    }
+    lastScrollY = window.scrollY
+  })
+</script>

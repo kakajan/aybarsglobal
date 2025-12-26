@@ -1,0 +1,131 @@
+---
+/**
+ * LanguageSwitcher Component
+ * Dropdown menu for switching between available languages
+ */
+import {
+  languages,
+  supportedLanguages,
+  type Language,
+  getLocalizedPath,
+} from '@/i18n'
+
+interface Props {
+  currentLang: Language
+  currentPath: string
+  class?: string
+}
+
+const { currentLang, currentPath, class: className = '' } = Astro.props
+
+// Get localized paths for all languages (convert languages object to array)
+const languageConfigs = supportedLanguages.map((code) => languages[code])
+const languageLinks = languageConfigs.map((lang) => ({
+  ...lang,
+  href: getLocalizedPath(currentPath, lang.code as Language),
+  isActive: lang.code === currentLang,
+}))
+
+// Get current language config
+const currentLangConfig = languages[currentLang]
+---
+
+<div class={`language-switcher ${className}`} data-language-switcher>
+  <button
+    class="language-switcher-btn"
+    aria-label="Select language"
+    aria-expanded="false"
+    aria-haspopup="true"
+    data-language-toggle
+  >
+    <span class="text-lg">{currentLangConfig?.flag}</span>
+    <span class="hidden sm:inline">{currentLangConfig?.nativeName}</span>
+    <svg
+      class="w-4 h-4 transition-transform duration-200"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+
+  <div class="language-dropdown" data-language-dropdown>
+    {
+      languageLinks.map((lang) => (
+        <a
+          href={lang.href}
+          class={`language-option ${lang.isActive ? 'active' : ''}`}
+          lang={lang.code}
+          hreflang={lang.code}
+        >
+          <span class="text-lg">{lang.flag}</span>
+          <span class="flex-1">{lang.nativeName}</span>
+          {lang.isActive && (
+            <svg
+              class="w-4 h-4 text-accent-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  // Initialize all language switchers
+  document.querySelectorAll('[data-language-switcher]').forEach((switcher) => {
+    const toggle = switcher.querySelector('[data-language-toggle]')
+    const dropdown = switcher.querySelector('[data-language-dropdown]')
+
+    if (!toggle || !dropdown) return
+
+    // Toggle dropdown on button click
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation()
+      const isOpen = dropdown.classList.contains('open')
+
+      // Close all other dropdowns first
+      document.querySelectorAll('[data-language-dropdown]').forEach((d) => {
+        d.classList.remove('open')
+        d.previousElementSibling?.setAttribute('aria-expanded', 'false')
+      })
+
+      if (!isOpen) {
+        dropdown.classList.add('open')
+        toggle.setAttribute('aria-expanded', 'true')
+      }
+    })
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open')
+      toggle.setAttribute('aria-expanded', 'false')
+    })
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dropdown.classList.remove('open')
+        toggle.setAttribute('aria-expanded', 'false')
+      }
+    })
+
+    // Prevent dropdown clicks from closing
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation()
+    })
+  })
+</script>

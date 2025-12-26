@@ -1,0 +1,242 @@
+---
+/**
+ * Dynamic language route for Grain Supply page
+ * Handles: /tr/services/grain-supply, /ar/services/grain-supply, /fa/services/grain-supply, /ru/services/grain-supply
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import CTASection from '@/components/home/CTASection.astro'
+import {
+  type Language,
+  supportedLanguages,
+  defaultLang,
+  getTranslations,
+  getLocalizedPath,
+} from '@/i18n'
+
+export function getStaticPaths() {
+  return supportedLanguages
+    .filter((lang) => lang !== defaultLang)
+    .map((lang) => ({
+      params: { lang },
+      props: { lang: lang as Language },
+    }))
+}
+
+const { lang } = Astro.props
+const t = getTranslations(lang)
+const localizedHref = (path: string) => getLocalizedPath(path, lang)
+
+const service = t.services.mainServicesData.find(
+  (s) => s.slug === 'grain-supply'
+)!
+
+const grainTypes = [
+  {
+    name: 'Wheat',
+    nameKey: 'wheat',
+    description:
+      'Premium quality wheat varieties for food production and processing',
+    icon: '🌾',
+  },
+  {
+    name: 'Corn',
+    nameKey: 'corn',
+    description:
+      'High-grade corn for animal feed, food processing, and industrial use',
+    icon: '🌽',
+  },
+  {
+    name: 'Barley',
+    nameKey: 'barley',
+    description: 'Quality barley for brewing, animal feed, and food industries',
+    icon: '🌿',
+  },
+  {
+    name: 'Soybeans',
+    nameKey: 'soybeans',
+    description:
+      'Non-GMO and conventional soybeans for oil and meal production',
+    icon: '🫘',
+  },
+]
+---
+
+<BaseLayout
+  title={t.services.grainSupply.title}
+  description={t.services.grainSupply.fullDescription}
+  lang={lang}
+>
+  <!-- Page Header -->
+  <section
+    class="relative py-20 md:py-28 bg-gradient-to-br from-success-900 via-success-800 to-success-700"
+  >
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <nav
+          class="flex items-center space-x-2 rtl:space-x-reverse text-sm text-gray-300 mb-6"
+        >
+          <a href={localizedHref('/')} class="hover:text-white">{t.nav.home}</a>
+          <span>/</span>
+          <a href={localizedHref('/services')} class="hover:text-white"
+            >{t.nav.services}</a
+          >
+          <span>/</span>
+          <span class="text-accent-400">{t.nav.grainSupply}</span>
+        </nav>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          {t.services.grainSupply.title}
+        </h1>
+        <p class="text-xl text-gray-300">
+          {t.services.grainSupply.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-subtitle"
+            >{t.services.grainSupply.shortTitle}</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-6"
+          >
+            {t.services.grainSupply.title}
+          </h2>
+          <div
+            class="prose prose-lg text-gray-600 dark:text-gray-400 space-y-4"
+          >
+            <p>
+              {t.services.grainSupply.fullDescription}
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {
+              service.features.map((feature) => (
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                  <svg
+                    class="w-5 h-5 text-success-500 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-gray-700 dark:text-gray-300">
+                    {feature}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="relative">
+          <div
+            class="bg-gradient-to-br from-success-100 to-accent-50 dark:from-success-900/30 dark:to-primary-900 rounded-3xl p-8 md:p-10"
+          >
+            <div
+              class="w-20 h-20 bg-success-600 rounded-2xl flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-2xl font-bold text-primary-900 dark:text-white text-center mb-4"
+            >
+              {t.services.features.qualityAssurance}
+            </h3>
+            <p class="text-center text-gray-600 dark:text-gray-400">
+              {t.services.whyChoose.qualityAssuranceDesc}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grain Types -->
+  <section class="section-padding bg-gray-50 dark:bg-primary-900">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.services.mainServices.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.services.grainSupply.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        {
+          grainTypes.map((grain) => (
+            <div class="card p-6 text-center group hover:shadow-xl">
+              <div class="text-5xl mb-4">{grain.icon}</div>
+              <h3 class="text-xl font-bold text-primary-900 dark:text-white mb-2">
+                {grain.name}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">
+                {grain.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section-padding bg-white dark:bg-primary-950">
+    <div class="container-custom">
+      <div class="section-title">
+        <span class="section-subtitle">{t.services.whyChoose.subtitle}</span>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-900 dark:text-white mb-4"
+        >
+          {t.services.whyChoose.title}
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        {
+          service.features.map((feature, index) => (
+            <div class="p-6 border border-gray-100 dark:border-primary-700 dark:bg-primary-800 rounded-2xl hover:border-success-200 dark:hover:border-success-600 hover:shadow-lg transition-all">
+              <div class="w-10 h-10 bg-success-100 dark:bg-success-900/30 rounded-lg flex items-center justify-center mb-4">
+                <span class="font-bold text-success-600 dark:text-success-400 ltr-nums">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
+              <h4 class="font-semibold text-primary-900 dark:text-white mb-2">
+                {feature}
+              </h4>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection lang={lang} />
+</BaseLayout>
