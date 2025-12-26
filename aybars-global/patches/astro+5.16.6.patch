@@ -1,0 +1,22 @@
+diff --git a/node_modules/astro/dist/assets/utils/remotePattern.js b/node_modules/astro/dist/assets/utils/remotePattern.js
+index 0491107..fd256d1 100644
+--- a/node_modules/astro/dist/assets/utils/remotePattern.js
++++ b/node_modules/astro/dist/assets/utils/remotePattern.js
+@@ -1,16 +1 @@
+-import {
+-  isRemoteAllowed,
+-  matchHostname,
+-  matchPathname,
+-  matchPattern,
+-  matchPort,
+-  matchProtocol
+-} from "@astrojs/internal-helpers/remote";
+-export {
+-  isRemoteAllowed,
+-  matchHostname,
+-  matchPathname,
+-  matchPattern,
+-  matchPort,
+-  matchProtocol
+-};
++export { matchPattern } from "@astrojs/internal-helpers/remote";

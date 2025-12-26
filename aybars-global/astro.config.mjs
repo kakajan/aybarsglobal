@@ -92,6 +92,20 @@ export default defineConfig({
         ssr: {
             noExternal: [],
         },
+        build: {
+            rollupOptions: {
+                onwarn (warning, warn) {
+                    if (
+                        warning?.code === 'UNUSED_EXTERNAL_IMPORT' &&
+                        typeof warning?.id === 'string' &&
+                        warning.id.includes('astro/dist/assets/utils/remotePattern.js')
+                    ) {
+                        return;
+                    }
+                    warn(warning);
+                },
+            },
+        },
     },
     image: {
         service: {

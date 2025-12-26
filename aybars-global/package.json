@@ -8,7 +8,8 @@
         "start": "astro dev",
         "build": "astro build",
         "preview": "astro preview",
-        "astro": "astro"
+        "astro": "astro",
+        "postinstall": "patch-package"
     },
     "dependencies": {
         "@astrojs/sitemap": "^3.2.1",
@@ -19,6 +20,7 @@
     },
     "devDependencies": {
         "@types/node": "^22.10.2",
+        "patch-package": "^8.0.0",
         "typescript": "^5.7.2"
     }
 }
