@@ -61,13 +61,13 @@ const currentPath = Astro.url.pathname
   <nav class="container-custom">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 group">
+      <a href={localizedHref('/')} class="flex items-center gap-3 group">
         <img
           src="/images/logo.svg"
           alt={companyInfo.name}
           class="h-10 w-auto transition-transform group-hover:scale-105"
         />
-        <div class="hidden sm:block">
+        <div class={`hidden sm:block ${isRtl ? 'text-right' : 'text-left'}`}>
           <span
             class="block text-lg font-bold text-primary-900 dark:text-white leading-tight"
             >AYBARS</span
@@ -80,7 +80,9 @@ const currentPath = Astro.url.pathname
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center space-x-1">
+      <div
+        class={`hidden lg:flex items-center gap-1 ${isRtl ? 'flex-row-reverse' : ''}`}
+      >
         {
           navLinks.map((link) => (
             <div class="relative group">
@@ -97,7 +99,7 @@ const currentPath = Astro.url.pathname
                 {link.name}
                 {link.children && (
                   <svg
-                    class="inline-block w-4 h-4 ml-1"
+                    class={`inline-block w-4 h-4 ${isRtl ? 'mr-1' : 'ml-1'}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -113,7 +115,9 @@ const currentPath = Astro.url.pathname
               </a>
 
               {link.children && (
-                <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div
+                  class={`absolute top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ${isRtl ? 'right-0' : 'left-0'}`}
+                >
                   <div class="bg-white dark:bg-primary-900 rounded-xl shadow-lg border border-gray-100 dark:border-primary-700 py-2 min-w-[220px]">
                     {link.children.map((child) => (
                       <a
@@ -203,7 +207,7 @@ const currentPath = Astro.url.pathname
                 {link.name}
               </a>
               {link.children && (
-                <div class="pl-4 space-y-1 mt-1">
+                <div class={`space-y-1 mt-1 ${isRtl ? 'pr-4' : 'pl-4'}`}>
                   {link.children.map((child) => (
                     <a
                       href={child.href}
