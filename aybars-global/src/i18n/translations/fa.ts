@@ -505,10 +505,10 @@ export const fa: Translations = {
   // Company Page
   company: {
     pageTitle: 'پروفایل شرکت',
-    pageDescription: 'پروفایل شرکت آیبارس گلوبال تجارت، تاریخچه و حضور جهانی ما را کشف کنید.',
+    pageDescription: 'پروفایل شرکت آیبارز گلوبال تجارت، تاریخچه و حضور جهانی ما را کشف کنید.',
     hero: {
       badge: 'پروفایل شرکت',
-      title: 'آیبارس گلوبال تجارت',
+      title: 'آیبارز گلوبال تجارت',
       tagline: 'شریک قابل اعتماد شما در تجارت جهانی',
     },
     overview: {
