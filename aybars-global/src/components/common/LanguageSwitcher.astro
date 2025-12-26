@@ -38,7 +38,16 @@ const currentLangConfig = languages[currentLang]
     aria-haspopup="true"
     data-language-toggle
   >
-    <span class="text-lg">{currentLangConfig?.flag}</span>
+    <img
+      src={currentLangConfig?.flagIcon}
+      width="18"
+      height="18"
+      loading="lazy"
+      decoding="async"
+      class="language-flag-icon"
+      alt=""
+      aria-hidden="true"
+    />
     <span class="hidden sm:inline">{currentLangConfig?.nativeName}</span>
     <svg
       class="w-4 h-4 transition-transform duration-200"
@@ -63,7 +72,16 @@ const currentLangConfig = languages[currentLang]
           lang={lang.code}
           hreflang={lang.code}
         >
-          <span class="text-lg">{lang.flag}</span>
+          <img
+            src={lang.flagIcon}
+            width="18"
+            height="18"
+            loading="lazy"
+            decoding="async"
+            class="language-flag-icon"
+            alt=""
+            aria-hidden="true"
+          />
           <span class="flex-1">{lang.nativeName}</span>
           {lang.isActive && (
             <svg

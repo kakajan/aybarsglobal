@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" width="24" height="16" role="img" aria-label="Saudi Arabia">
+  <rect width="24" height="16" fill="#006c35"/>
+  <!-- Simplified sword (kept minimal) -->
+  <rect x="6" y="11" width="12" height="0.9" rx="0.45" fill="#ffffff" opacity="0.95"/>
+  <rect x="5.3" y="10.8" width="1.2" height="1.3" rx="0.3" fill="#ffffff" opacity="0.95"/>
+</svg>

@@ -7,6 +7,7 @@ export const languages = {
     dir: 'ltr',
     locale: 'en-US',
     flag: '🇺🇸',
+    flagIcon: '/images/flags/us.svg',
   },
   tr: {
     code: 'tr',
@@ -15,6 +16,7 @@ export const languages = {
     dir: 'ltr',
     locale: 'tr-TR',
     flag: '🇹🇷',
+    flagIcon: '/images/flags/tr.svg',
   },
   ar: {
     code: 'ar',
@@ -23,6 +25,7 @@ export const languages = {
     dir: 'rtl',
     locale: 'ar-SA',
     flag: '🇸🇦',
+    flagIcon: '/images/flags/sa.svg',
   },
   fa: {
     code: 'fa',
@@ -31,6 +34,7 @@ export const languages = {
     dir: 'rtl',
     locale: 'fa-IR',
     flag: '🇮🇷',
+    flagIcon: '/images/flags/ir.svg',
   },
   ru: {
     code: 'ru',
@@ -39,6 +43,7 @@ export const languages = {
     dir: 'ltr',
     locale: 'ru-RU',
     flag: '🇷🇺',
+    flagIcon: '/images/flags/ru.svg',
   },
 } as const
 

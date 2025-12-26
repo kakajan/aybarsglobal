@@ -204,7 +204,23 @@ const t = getTranslations(lang)
               {t.contact.form.description}
             </p>
 
-            <form class="space-y-6" action="/api/contact" method="POST">
+            <form
+              id="contact-form"
+              class="space-y-6"
+              action="/api/contact.php"
+              method="POST"
+              novalidate
+            >
+              <!-- Honeypot field for spam protection -->
+              <input
+                type="text"
+                name="website"
+                class="hidden"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -218,6 +234,8 @@ const t = getTranslations(lang)
                     id="firstName"
                     name="firstName"
                     required
+                    minlength="2"
+                    maxlength="50"
                     class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-primary-700 dark:bg-primary-800 dark:text-white focus:border-accent-500
                            focus:ring-2 focus:ring-accent-500/20 outline-none transition-all"
                   />
@@ -234,6 +252,8 @@ const t = getTranslations(lang)
                     id="lastName"
                     name="lastName"
                     required
+                    minlength="2"
+                    maxlength="50"
                     class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-primary-700 dark:bg-primary-800 dark:text-white focus:border-accent-500
                            focus:ring-2 focus:ring-accent-500/20 outline-none transition-all"
                   />
@@ -415,3 +435,6 @@ const t = getTranslations(lang)
     </div>
   </section>
 </BaseLayout>
+
+<!-- Contact Form Validation Script -->
+<script src="/js/contact-form.js" defer></script>

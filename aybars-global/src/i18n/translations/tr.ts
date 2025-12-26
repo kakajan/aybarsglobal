@@ -422,6 +422,83 @@ export const tr: Translations = {
       privacy: 'Gizlilik Politikasını kabul ediyorum ve AYBARS GLOBAL TİCARET\'ten iletişim almayı onaylıyorum.',
       privacyConsent: 'Gizlilik Politikasını kabul ediyorum ve AYBARS GLOBAL TİCARET\'ten iletişim almayı onaylıyorum.',
       submit: 'Mesaj Gönder',
+      sending: 'Gönderiliyor...',
+      validation: {
+        firstNameRequired: 'Ad alanı zorunludur',
+        firstNameMinLength: 'Ad en az 2 karakter olmalıdır',
+        firstNameMaxLength: 'Ad 50 karakteri aşamaz',
+        lastNameRequired: 'Soyad alanı zorunludur',
+        lastNameMinLength: 'Soyad en az 2 karakter olmalıdır',
+        lastNameMaxLength: 'Soyad 50 karakteri aşamaz',
+        emailRequired: 'E-posta adresi zorunludur',
+        emailInvalid: 'Lütfen geçerli bir e-posta adresi girin',
+        phoneInvalid: 'Lütfen geçerli bir telefon numarası girin',
+        phoneMinLength: 'Telefon numarası en az 7 rakam olmalıdır',
+        companyMaxLength: 'Şirket adı 100 karakteri aşamaz',
+        messageRequired: 'Mesaj alanı zorunludur',
+        messageMinLength: 'Mesaj en az 10 karakter olmalıdır',
+        messageMaxLength: 'Mesaj 2000 karakteri aşamaz',
+        privacyRequired: 'Gizlilik politikasını kabul etmelisiniz',
+      },
+      success: {
+        title: 'Mesaj Başarıyla Gönderildi!',
+        message: 'Bizimle iletişime geçtiğiniz için teşekkür ederiz. 24-48 saat içinde size geri döneceğiz.',
+      },
+      error: {
+        title: 'Mesaj Gönderme Hatası',
+        message: 'Mesajınız gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
+        network: 'Ağ hatası. Lütfen bağlantınızı kontrol edip tekrar deneyin.',
+        server: 'Sunucu hatası. Lütfen daha sonra tekrar deneyin.',
+      },
+    },
+  },
+
+  // Policy Pages
+  policies: {
+    privacy: {
+      pageTitle: 'Gizlilik Politikası',
+      pageDescription: 'Web sitemizi kullandığınızda ve bizimle iletişime geçtiğinizde kişisel bilgilerinizi nasıl işlediğimizi öğrenin.',
+      hero: {
+        badge: 'Yasal',
+        title: 'Gizlilik Politikası',
+        description: 'Bu sayfa, web sitemizle etkileşiminizde bilgilerin nasıl toplandığını ve kullanıldığını açıklar.',
+      },
+      content: [
+        'Bizimle iletişime geçtiğinizde paylaştığınız bilgileri (ör. ad, e-posta, telefon, şirket adı ve mesaj içeriği) işleyebiliriz.',
+        'Bu bilgileri taleplerinize yanıt vermek, istenen hizmetleri sağlamak ve iletişimimizi geliştirmek için kullanırız.',
+        'Kişisel bilgilerinizi satmayız. Bilgileri yalnızca web sitesini işletmek ve size yanıt vermek için gerekli hizmet sağlayıcılarla paylaşabiliriz.',
+        'Bu Gizlilik Politikası hakkında sorularınız varsa, lütfen İletişim sayfasındaki bilgilerden bizimle iletişime geçin.',
+      ],
+    },
+    terms: {
+      pageTitle: 'Kullanım Şartları',
+      pageDescription: 'Web sitemizi ve içeriklerimizi kullanırken geçerli olan şartları okuyun.',
+      hero: {
+        badge: 'Yasal',
+        title: 'Kullanım Şartları',
+        description: 'Bu şartlar, web sitemizi ve materyallerimizi kullanma kurallarını açıklar.',
+      },
+      content: [
+        'Bu web sitesine erişerek ve kullanarak bu Kullanım Şartları\'na uymayı kabul edersiniz.',
+        'Web sitesi içeriği genel bilgilendirme amaçlıdır ve önceden bildirilmeksizin değiştirilebilir.',
+        'Web sitesini kötüye kullanamaz, çalışmasını engellemeye çalışamaz veya hukuka aykırı amaçlarla kullanamazsınız.',
+        'Bu şartlarla ilgili sorularınız için lütfen İletişim sayfasındaki bilgilerden bize ulaşın.',
+      ],
+    },
+    cookies: {
+      pageTitle: 'Çerez Politikası',
+      pageDescription: 'Web sitemizde çerezlerin ve benzer teknolojilerin nasıl kullanılabileceğini öğrenin.',
+      hero: {
+        badge: 'Yasal',
+        title: 'Çerez Politikası',
+        description: 'Bu sayfa, site işlevselliği ve analiz için çerezlerin nasıl kullanılabileceğini açıklar.',
+      },
+      content: [
+        'Çerezler, web sitelerinin düzgün çalışmasına ve tercihleri hatırlamasına yardımcı olan küçük dosyalardır.',
+        'Siteyi işletmek, kullanım eğilimlerini anlamak ve performansı iyileştirmek için çerezler kullanabiliriz.',
+        'Çerezleri tarayıcı ayarlarınızdan kontrol edebilirsiniz. Çerezleri devre dışı bırakmak site işlevselliğini etkileyebilir.',
+        'Çerez kullanımıyla ilgili sorularınız için lütfen İletişim sayfasındaki bilgilerden bize ulaşın.',
+      ],
     },
   },
 
@@ -695,6 +772,7 @@ export const tr: Translations = {
     cookies: 'Çerez Politikası',
     address: 'Sarıyer, Türkiye',
     rights: 'Tüm hakları saklıdır.',
+    designedBy: 'Tasarım ve geliştirme:',
     newsletter: {
       title: 'Güncel Kalın',
       description: 'En son haberler ve güncellemeler için bültenimize abone olun.',

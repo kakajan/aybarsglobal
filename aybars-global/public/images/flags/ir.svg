@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" width="24" height="16" role="img" aria-label="Iran">
+  <rect width="24" height="16" fill="#ffffff"/>
+  <rect width="24" height="5.333" y="0" fill="#239f40"/>
+  <rect width="24" height="5.333" y="10.666" fill="#da0000"/>
+  <!-- Simplified emblem placeholder (kept minimal but recognizable tricolor) -->
+  <circle cx="12" cy="8" r="1.05" fill="#da0000" opacity="0.85"/>
+</svg>

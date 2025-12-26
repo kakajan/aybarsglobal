@@ -3,7 +3,7 @@
 ---
 
 <button
-  id="dark-mode-toggle"
+  data-dark-mode-toggle
   type="button"
   class="relative p-2 rounded-lg bg-gray-100 dark:bg-primary-800 hover:bg-gray-200 dark:hover:bg-primary-700
          transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-500/50"
@@ -12,7 +12,7 @@
 >
   <!-- Sun Icon (shown in dark mode) -->
   <svg
-    id="sun-icon"
+    data-sun-icon
     class="w-5 h-5 text-accent-500 hidden"
     fill="none"
     stroke="currentColor"
@@ -28,7 +28,7 @@
 
   <!-- Moon Icon (shown in light mode) -->
   <svg
-    id="moon-icon"
+    data-moon-icon
     class="w-5 h-5 text-primary-700 dark:text-white"
     fill="none"
     stroke="currentColor"
@@ -44,12 +44,13 @@
 </button>
 
 <script>
-  const toggle = document.getElementById('dark-mode-toggle')
-  const sunIcon = document.getElementById('sun-icon')
-  const moonIcon = document.getElementById('moon-icon')
+  const toggles = document.querySelectorAll('[data-dark-mode-toggle]')
 
-  function updateIcons() {
+  function updateIconsForToggle(toggleEl) {
+    const sunIcon = toggleEl.querySelector('[data-sun-icon]')
+    const moonIcon = toggleEl.querySelector('[data-moon-icon]')
     const isDark = document.documentElement.classList.contains('dark')
+
     if (isDark) {
       sunIcon?.classList.remove('hidden')
       moonIcon?.classList.add('hidden')
@@ -59,12 +60,22 @@
     }
   }
 
-  // Initial icon state
-  updateIcons()
+  function updateAllIcons() {
+    toggles.forEach((toggleEl) => updateIconsForToggle(toggleEl))
+  }
 
-  toggle?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark')
-    localStorage.setItem('theme', isDark ? 'dark' : 'light')
-    updateIcons()
+  // Initial icon state
+  updateAllIcons()
+
+  toggles.forEach((toggleEl) => {
+    // Prevent double-binding if this component's script executes more than once
+    if (toggleEl.dataset.darkModeBound === 'true') return
+    toggleEl.dataset.darkModeBound = 'true'
+
+    toggleEl.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark')
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+      updateAllIcons()
+    })
   })
 </script>

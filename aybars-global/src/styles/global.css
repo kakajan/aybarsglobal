@@ -584,6 +584,13 @@
   @apply relative;
 }
 
+.language-flag-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
 .language-switcher-btn {
   @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
          text-primary-900 dark:text-white hover:bg-gray-100 dark:hover:bg-primary-800

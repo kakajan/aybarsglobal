@@ -420,6 +420,83 @@ export const en = {
       privacy: 'I agree to the Privacy Policy and consent to receiving communications from AYBARS GLOBAL TRADING.',
       privacyConsent: 'I agree to the Privacy Policy and consent to receiving communications from AYBARS GLOBAL TRADING.',
       submit: 'Send Message',
+      sending: 'Sending...',
+      validation: {
+        firstNameRequired: 'First name is required',
+        firstNameMinLength: 'First name must be at least 2 characters',
+        firstNameMaxLength: 'First name cannot exceed 50 characters',
+        lastNameRequired: 'Last name is required',
+        lastNameMinLength: 'Last name must be at least 2 characters',
+        lastNameMaxLength: 'Last name cannot exceed 50 characters',
+        emailRequired: 'Email address is required',
+        emailInvalid: 'Please enter a valid email address',
+        phoneInvalid: 'Please enter a valid phone number',
+        phoneMinLength: 'Phone number must be at least 7 digits',
+        companyMaxLength: 'Company name cannot exceed 100 characters',
+        messageRequired: 'Message is required',
+        messageMinLength: 'Message must be at least 10 characters',
+        messageMaxLength: 'Message cannot exceed 2000 characters',
+        privacyRequired: 'You must agree to the privacy policy',
+      },
+      success: {
+        title: 'Message Sent Successfully!',
+        message: 'Thank you for contacting us. We will get back to you within 24-48 hours.',
+      },
+      error: {
+        title: 'Error Sending Message',
+        message: 'An error occurred while sending your message. Please try again later.',
+        network: 'Network error. Please check your connection and try again.',
+        server: 'Server error. Please try again later.',
+      },
+    },
+  },
+
+  // Policy Pages
+  policies: {
+    privacy: {
+      pageTitle: 'Privacy Policy',
+      pageDescription: 'Learn how we handle personal information when you use our website and contact us.',
+      hero: {
+        badge: 'Legal',
+        title: 'Privacy Policy',
+        description: 'This page explains how we collect and use information when you interact with our website.',
+      },
+      content: [
+        'We may process information you provide when you contact us (for example: name, email address, phone number, company name, and message details).',
+        'We use this information to respond to inquiries, provide requested services, and improve our communications.',
+        'We do not sell your personal information. We may share information with service providers only as needed to operate the website and respond to you.',
+        'If you have questions about this Privacy Policy, please contact us using the details on the Contact page.',
+      ],
+    },
+    terms: {
+      pageTitle: 'Terms of Use',
+      pageDescription: 'Read the terms that apply when you use our website and content.',
+      hero: {
+        badge: 'Legal',
+        title: 'Terms of Use',
+        description: 'These terms outline the rules for using our website and materials.',
+      },
+      content: [
+        'By accessing and using this website, you agree to comply with these Terms of Use.',
+        'Website content is provided for general informational purposes. It may change at any time without notice.',
+        'You may not misuse the website, attempt to disrupt its operation, or use it for unlawful activities.',
+        'For questions regarding these terms, please contact us using the details on the Contact page.',
+      ],
+    },
+    cookies: {
+      pageTitle: 'Cookie Policy',
+      pageDescription: 'Understand how cookies and similar technologies may be used on our website.',
+      hero: {
+        badge: 'Legal',
+        title: 'Cookie Policy',
+        description: 'This page explains how cookies may be used to support site functionality and analytics.',
+      },
+      content: [
+        'Cookies are small files stored on your device that help websites function properly and remember preferences.',
+        'We may use cookies to operate the site, understand usage patterns, and improve performance.',
+        'You can control cookies through your browser settings. Disabling cookies may affect site functionality.',
+        'If you have questions about our use of cookies, please contact us using the details on the Contact page.',
+      ],
     },
   },
 
@@ -693,6 +770,7 @@ export const en = {
     cookies: 'Cookie Policy',
     address: 'SARIYER, Turkey',
     rights: 'All rights reserved.',
+    designedBy: 'Designed & developed by',
     newsletter: {
       title: 'Stay Updated',
       description: 'Subscribe to our newsletter for the latest news and updates.',
