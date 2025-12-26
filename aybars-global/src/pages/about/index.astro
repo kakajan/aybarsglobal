@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import CTASection from '@/components/home/CTASection.astro'
-import { companyInfo, vision, mission, coreValues } from '@/data/company'
+import { companyInfo, coreValues } from '@/data/company'
 import { defaultLang, getTranslations } from '@/i18n'
 
 const lang = defaultLang
@@ -36,7 +36,15 @@ const t = getTranslations(lang)
   </section>
 
   <!-- Company Story -->
-  <section class="section-padding bg-white dark:bg-primary-950">
+  <section
+    class="relative section-padding bg-white/5 dark:bg-primary-950/5 overflow-hidden"
+  >
+    <!-- Parallax Background -->
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat -z-10"
+      style="background-image: url('/images/SkyLand-blue.webp'); background-attachment: fixed; opacity: 0.15;"
+    >
+    </div>
     <div class="container-custom">
       <div
         class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
@@ -117,13 +125,15 @@ const t = getTranslations(lang)
             </svg>
           </div>
           <h3 class="text-2xl font-bold text-primary-900 dark:text-white mb-4">
-            {vision.title}
+            {t.about.vision.title}
           </h3>
-          <p class="text-accent-500 font-medium mb-4">{vision.subtitle}</p>
+          <p class="text-accent-500 font-medium mb-4">
+            {t.about.vision.subtitle}
+          </p>
           <div
             class="text-gray-600 dark:text-gray-400 space-y-3 whitespace-pre-line"
           >
-            {vision.content}
+            {t.about.vision.description}
           </div>
         </div>
 
@@ -148,13 +158,15 @@ const t = getTranslations(lang)
             </svg>
           </div>
           <h3 class="text-2xl font-bold text-primary-900 dark:text-white mb-4">
-            {mission.title}
+            {t.about.mission.title}
           </h3>
-          <p class="text-accent-500 font-medium mb-4">{mission.subtitle}</p>
+          <p class="text-accent-500 font-medium mb-4">
+            {t.about.mission.subtitle}
+          </p>
           <div
             class="text-gray-600 dark:text-gray-400 space-y-3 whitespace-pre-line"
           >
-            {mission.content}
+            {t.about.mission.description}
           </div>
         </div>
       </div>

@@ -1,0 +1,30 @@
+{
+    "name": "AYBARS GLOBAL TRADING",
+    "short_name": "AYBARS GLOBAL",
+    "description": "A leader in international trade, specializing in logistics, grain supply, and industrial metals.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "theme_color": "#0A1628",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ],
+    "categories": [
+        "business",
+        "logistics"
+    ],
+    "screenshots": [
+        {
+            "src": "/images/SkyLand-blue.webp",
+            "sizes": "540x720",
+            "type": "image/webp"
+        }
+    ]
+}

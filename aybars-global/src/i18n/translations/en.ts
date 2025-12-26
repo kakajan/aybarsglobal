@@ -192,12 +192,12 @@ export const en = {
     vision: {
       subtitle: 'Our Vision',
       title: 'Shaping the Future of Global Trade',
-      description: 'To be recognized as a trusted global leader that connects markets, cultures, and opportunities through sustainable growth, reliability, and integrity.',
+      description: 'At AYBARS GLOBAL TRADING, our vision is to bridge tradition and innovation to shape the future of international trade.\n\nWe aspire to be recognized as a trusted global leader that connects markets, cultures, and opportunities through sustainable growth, reliability, and integrity.\n\nGuided by a deep commitment to quality and responsible progress, we envision a world where trade is not just an exchange of goods, but a partnership that drives development, trust, and shared prosperity across nations.',
     },
     mission: {
       subtitle: 'Our Mission',
       title: 'Empowering Global Commerce',
-      description: 'To empower global trade through innovation, trust, and excellence — creating sustainable trading ecosystems that deliver long-term value.',
+      description: 'At AYBARS GLOBAL TRADING, our mission is to empower global trade through innovation, trust, and excellence.\n\nWe strive to connect producers and markets worldwide by delivering premium food materials, ensuring seamless logistics solutions, and maintaining integrity in every transaction.\n\nOur goal is to create a sustainable and transparent trading ecosystem that supports economic growth, strengthens international partnerships, and delivers long-term value for our clients and communities around the world.',
     },
     values: {
       subtitle: 'Core Values',

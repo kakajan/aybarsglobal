@@ -194,12 +194,12 @@ export const tr: Translations = {
     vision: {
       subtitle: 'Vizyonumuz',
       title: 'Küresel Ticaretin Geleceğini Şekillendirmek',
-      description: 'Sürdürülebilir büyüme, güvenilirlik ve dürüstlük yoluyla pazarları, kültürleri ve fırsatları birbirine bağlayan güvenilir bir küresel lider olarak tanınmak.',
+      description: 'AYBARS GLOBAL TİCARET\'te, vizyonumuz geleneği ve yeniliği birleştirerek uluslararası ticaretin geleceğini şekillendirmektir.\n\nSürdürülebilir büyüme, güvenilirlik ve dürüstlük yoluyla pazarları, kültürleri ve fırsatları birbirine bağlayan güvenilir bir küresel lider olarak tanınmak istiyoruz.\n\nKalite ve sorumlu ilerlemeye yönelik derin bir taahhüt tarafından rehber alınan, ticaretin sadece mal ticareti değil, kalkınmayı, güveni ve uluslar arasında paylaşılan refahı tetikleyen bir ortaklık olduğu bir dünyayı öngörüyoruz.',
     },
     mission: {
       subtitle: 'Misyonumuz',
       title: 'Küresel Ticareti Güçlendirmek',
-      description: 'İnovasyon, güven ve mükemmellik yoluyla küresel ticareti güçlendirmek — uzun vadeli değer sunan sürdürülebilir ticaret ekosistemleri oluşturmak.',
+      description: 'AYBARS GLOBAL TİCARET\'te, misyonumuz inovasyon, güven ve mükemmellik yoluyla küresel ticareti güçlendirmektir.\n\nDünya çapında üreticileri ve pazarları birbirine bağlamak, premium gıda malzemeleri sunmak, sorunsuz lojistik çözümleri sağlamak ve her işlemde dürüstlüğü korumak için çalışıyoruz.\n\nHedefimiz, ekonomik büyümeyi destekleyen, uluslararası ortaklıkları güçlendiren ve müşterilerimize ve dünya çapında topluluklar için uzun vadeli değer sunan sürdürülebilir ve şeffaf bir ticaret ekosistemi oluşturmaktır.',
     },
     values: {
       subtitle: 'Temel Değerler',

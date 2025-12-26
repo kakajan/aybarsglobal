@@ -183,7 +183,7 @@
 
   .bg-hero {
     background-image: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(30, 58, 95, 0.85) 100%),
-                      url('/images/hero-bg.webp');
+                      url('/images/SkyLand-blue.webp');
     background-size: cover;
     background-position: center;
   }

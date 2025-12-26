@@ -18,12 +18,9 @@ export const companyInfo = {
     },
     phones: [
       '+90 212 830 28 38',
-      '+90 212 830 58 38',
-      '+90 212 830 20 38'
     ],
     emails: [
       'info@aybarsglobal.com',
-      'contact@aybarsglobal.com.tr'
     ],
     website: 'https://aybarsglobal.com'
   },

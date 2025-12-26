@@ -58,15 +58,20 @@ const socialLinks = [
   <div class="container-custom py-16 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
       <!-- Brand Column -->
-      <div class="lg:col-span-2">
-        <a href={localizedHref('/')} class="inline-block mb-6">
+      <div class="lg:col-span-2 flex flex-col items-center justify-center">
+        <a
+          href={localizedHref('/')}
+          class="flex items-center justify-center mb-4"
+        >
           <img
             src="/images/logo-light.svg"
             alt={t.meta.siteName}
-            class="h-12 w-auto"
+            class="w-[50%] h-auto"
           />
         </a>
-        <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-sm">
+        <p
+          class="text-gray-300 w-full text-sm leading-relaxed mb-4 max-w-sm text-center"
+        >
           {t.footer.description}
         </p>
         <div class="flex gap-4">
@@ -248,7 +253,7 @@ const socialLinks = [
         <p class="text-gray-400 text-sm text-center">
           © <span class="ltr-nums">{currentYear}</span>
           {t.meta.siteName}. {t.footer.rights}
-          <br>
+          <br />
           {t.footer.designedBy}{' '}
           <a
             href="https://aytronic.ir"
