@@ -18,6 +18,7 @@ const isRtl = isRTL(currentLang)
 // Helper to create localized href
 const localizedHref = (path: string) => getLocalizedPath(path, currentLang)
 
+// Full nav links for mobile menu (all items visible)
 const navLinks = [
   { name: t.nav.home, href: localizedHref('/') },
   {
@@ -50,6 +51,11 @@ const navLinks = [
   { name: t.nav.press, href: localizedHref('/press') },
   { name: t.nav.contact, href: localizedHref('/contact') },
 ]
+
+// Desktop nav links - hide events and press for Russian to prevent menu overflow
+const desktopNavLinks = currentLang === 'ru' 
+  ? navLinks.filter(link => link.href !== localizedHref('/events') && link.href !== localizedHref('/press'))
+  : navLinks
 
 const currentPath = Astro.url.pathname
 ---
@@ -84,7 +90,7 @@ const currentPath = Astro.url.pathname
         class={`hidden lg:flex items-center gap-1 ${isRtl ? 'flex-row-reverse' : ''}`}
       >
         {
-          navLinks.map((link) => (
+          desktopNavLinks.map((link) => (
             <div class="relative group">
               <a
                 href={link.href}
