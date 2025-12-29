@@ -768,7 +768,7 @@ export const en = {
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
     cookies: 'Cookie Policy',
-    address: 'SARIYER, Turkey',
+    address: 'SARIYER, ISTANBUL, Turkey',
     rights: 'All rights reserved.',
     designedBy: 'Designed & developed by',
     newsletter: {

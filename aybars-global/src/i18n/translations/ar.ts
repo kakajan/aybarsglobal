@@ -770,7 +770,7 @@ export const ar: Translations = {
     privacy: 'سياسة الخصوصية',
     terms: 'شروط الخدمة',
     cookies: 'سياسة ملفات تعريف الارتباط',
-    address: 'سارير، تركيا',
+    address: 'سارير، إسطنبول، تركيا',
     rights: 'جميع الحقوق محفوظة.',
     designedBy: 'تصميم وتطوير بواسطة',
     newsletter: {

@@ -770,7 +770,7 @@ export const ru: Translations = {
     privacy: 'Политика конфиденциальности',
     terms: 'Условия использования',
     cookies: 'Политика cookies',
-      address: 'Сарыер, Турция',
+      address: 'Сарыер, Стамбул, Турция',
     rights: 'Все права защищены.',
     designedBy: 'Дизайн и разработка:',
     newsletter: {

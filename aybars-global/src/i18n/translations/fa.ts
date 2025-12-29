@@ -770,7 +770,7 @@ export const fa: Translations = {
     privacy: 'سیاست حریم خصوصی',
     terms: 'شرایط خدمات',
     cookies: 'سیاست کوکی‌ها',
-      address: 'ساریر، ترکیه',
+      address: 'ساری‌یَر، استانبول، ترکیه',
     rights: 'تمامی حقوق محفوظ است.',
     designedBy: 'طراحی و توسعه توسط',
     newsletter: {

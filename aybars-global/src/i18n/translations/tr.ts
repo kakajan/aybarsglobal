@@ -770,7 +770,7 @@ export const tr: Translations = {
     privacy: 'Gizlilik Politikası',
     terms: 'Kullanım Şartları',
     cookies: 'Çerez Politikası',
-    address: 'Sarıyer, Türkiye',
+    address: 'Sarıyer, İstanbul, Türkiye',
     rights: 'Tüm hakları saklıdır.',
     designedBy: 'Tasarım ve geliştirme:',
     newsletter: {
