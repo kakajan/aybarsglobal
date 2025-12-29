@@ -368,7 +368,7 @@ function sendAutoReply($data)
 
     $subjects = [
         'en' => 'Thank you for contacting AYBARS GLOBAL TRADING',
-        'fa' => 'با تشکر از تماس شما با آیبارز گلوبال تجارت',
+        'fa' => 'با تشکر از تماس شما با آی‌بارس گلوبال تجارت',
         'ar' => 'شكراً لتواصلك مع أيبارس جلوبال للتجارة',
         'tr' => 'AYBARS GLOBAL TİCARET ile iletişime geçtiğiniz için teşekkürler',
         'ru' => 'Спасибо за обращение в AYBARS GLOBAL TRADING',
@@ -407,11 +407,11 @@ function getAutoReplyTemplate($data, $lang)
         ],
         'fa' => [
             'greeting' => htmlspecialchars($data['firstName']) . ' عزیز',
-            'thanks'   => 'از تماس شما با آیبارز گلوبال تجارت متشکریم.',
+            'thanks'   => 'از تماس شما با آی‌بارس گلوبال تجارت متشکریم.',
             'received' => 'پیام شما دریافت شد و ظرف ۲۴ تا ۴۸ ساعت کاری با شما تماس خواهیم گرفت.',
             'summary'  => 'خلاصه درخواست شما:',
             'regards'  => 'با احترام،',
-            'team'     => 'تیم آیبارز گلوبال تجارت',
+            'team'     => 'تیم آی‌بارس گلوبال تجارت',
         ],
         'ar' => [
             'greeting' => 'عزيزي ' . htmlspecialchars($data['firstName']),
